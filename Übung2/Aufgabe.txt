@@ -1,0 +1,37 @@
+Aufgabe 1
+Schreiben Sie in dieser Aufgabe eine Klasse, die eine auf einem Array
+als Speicher benutzende generische Liste realisiert. (Eine solche Klasse wurde
+bereits im ersten Semester entwickelt.) Sie soll folgende Eigenschaften haben:
+
+a) Es soll das Interface eins.Iterable implementiert werden.
+
+b) Es soll eine Methode add zum Hinzufügen neuer Elemente geben.
+
+c) Es soll zwei Konstruktoren geben. Einen Standardkonstruktor ohne Parameter und einen Konstruktor 
+mit einer variablen Parameteranzahl. Im zweiten Fall sollen die Parameter die Elemente der Liste werden.
+
+d) DieStandardmethode length soll überschrieben werden.Warum ist dieses sinnvoller als auf die bereits in
+eins.Iterable implementierte Standardmethode zu vertrauen? Schreiben Sie umfangreiche Tests für alle Methoden.
+
+
+
+Aufgabe 2
+Schreiben Sie für die Schnittstelle eins.Iterable
+weitere Standardmethoden:
+
+a) Eine Methode zum Anhängen eines weiteren Iterable-Objekts:
+public default Iterable<A> append(java.lang.Iterable<A> that)
+Sie dürfen dabei die Klasse Append des ersten Übungsblattes verwenden.
+
+b) Schreiben Sie unter Zuhilfenahme der Klasse PairIterable des letzten Übungsblattes folgende Methode, 
+die das Iterable-Objekt paarweise mit einem zweiten Iterable-Objekt verbindet:
+public default <B> Iterable<Pair<A,B>> zip(java.lang.Iterable<B> that)
+
+c) Schreiben Sie jetzt unter Zuhilfenahme der Klasse TwoDimIterable folgende Methode, die alle Paare 
+aus den beiden Iterable-Objekten bereit stellt:
+public default <B> Iterable<Pair<A,B>> cross(java.lang.Iterable<B> that)
+
+d) Schreiben Sie eine Standardmethode für die Stringdarstellung eines Iterable-Objekts.
+public default String asString()
+Was passiert, wenn Sie versuchen als Standardmethode die Methode toString zu überschreiben.
+Testen Sie mit Hilfe der Klasse AList aus der ersten Aufgabe alle Standardmethoden der Klasse Iterable.
