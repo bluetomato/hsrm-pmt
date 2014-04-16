@@ -1,0 +1,65 @@
+Aufgabe 1
+In dieser Aufgabe sollen Sie Klassen schreiben, die die Schnittstelle Iterable
+implementieren und es ermöglichen über unterschiedliche Daten zu iterieren.
+Der Iterator soll dabei jeweils als private innere Klasse realisiert werden.
+
+a) SchreibenSienocheinmal,wiebereitsindiesemKapitelvorgemacht,eine Iterable-Klasse, die es es erlaubt über 
+einen Zahlenbereich zu iterieren. Nennen Sie die Klasse IntRange und sehen Sie viele verschiedene Konstruktoren vor:
+• IntRange(): es wird endlos über alle int Werte beginnend bei 0 iteriert.
+• IntRange(int from): es wird endlos über alle int Werte beginnend bei from iteriert.
+• IntRange(int from, int to): es wird beginnend bei from bis einschließlich to iteriert.
+• IntRange(int from, int to, int step): es wird beginnend bei from bis einschließlich to in step Schritten iteriert.
+
+b) Schreiben Sie eine Klasse Fib, die Iterable<Integer> so implementiert, dass beim Aufruf der Methode 
+next nacheinander die Fibonaccizahlen zurück gegeben werden.
+
+c) Schreiben Sie eine Klasse IterableString. Sie soll im Konstruktor ein String-Objekt erhalten. 
+Die Klasse soll Iterable<Character> so implementieren, dass über die einzelnen Zeichen des Strings iteriert wird.
+
+d) Schreiben Sie eine Klasse Lines. Sie soll Iterable<String> so implementieren, dass nacheinander 
+die Zeilen eines im Konstruktor übergebenen Strings bei der Iteration durchlaufen werden.
+
+e) Kongruenzgeneratoren sind Algorithmen, mit denen sich zufällig aussehende Zahlenfolgen erzeugen 
+erzeugen lassen. Man spricht dabei auch von Pseudozufallszahlen. Schreiben Sie eine iterierbare Klasse Random
+ die als Iterator einen einfachen Kongruenzgenerator benutzt, um eine Zahlenfolge zu erzeugen.
+
+f) SchreibenSieeineKlasse ReaderIterable. Sie soll Iterable<Character> so implementieren, dass über die 
+einzelnen Zeichen, die ein im Konstruktor übergebenes Reader-Objekt liefert, iteriert wird. 
+Bei der Lösung dieser Aufgabe ergibt sich ein Problem. Ein Reader kann nur einmal zum Iterieren benutzt 
+werden. Würde man erlauben, das zwei Iteratoren die Methode desselben Readers benutzen, um das 
+nächste Element zu holen, dann würden beide Iteratoren implizit ein Zeichen weiter geschaltet werden. 
+Daher werden wir verbieten, dass zweimal die Methode iterator() aufgerufen wird. Beim zweiten Mal wird 
+dann eine Ausnahme geworfen.
+
+
+
+Aufgabe 2
+In dieser Aufgabe sollen Sie aus einem oder mehreren übergebenen iterierbaren Objekten neue iterierbare 
+Objekte erzeugen, so wie es die Klasse Append in diesem Kapitel bereits macht.
+
+a) Schreiben Sie eine generische Klasse Cons<E>, die Iterable<E> implementiert.
+Es soll folgenden Konstruktor geben: Cons(E head, Iterable<E> tail). Der Iterator zu dieser 
+Klasse soll beim ersten Aufruf von next() das Element head zurück geben und anschließend die 
+Elemente des Iterators von tail.
+
+b) Wenn es zwei iterierbare Objekte gibt, dann benötigt man manchmal, gleichzeitig zusammen durch die 
+beiden Objekte zu iterieren. Das Ergebnis ist dann ein iterierbares Objekt, das über Paare von Objekten iteriert.
+Das erste Paar besteht aus den beiden ersten Objekten der Iterationen, das zweite Paar aus den beiden 
+zweiten usw. Schließlich endet die Iteration, wenn eines der beiden iterierbaren Objekte kein nächstes Element
+hat. Schreiben Sie zunächst eine generische Klasse Pair, die es ermöglicht Paare von Objekten zu repräsentieren. 
+Schreiben Sie eine generische Klasse PairIterable<A,B>,die Iterable<Pair<A,B>> implementiert . Sie soll in 
+einem Konstruktor zwei iterierbare Objekte übergeben bekommen:
+public PairIterable(Iterable<A> it1, Iteratable<B> it2)
+Beim Iterieren soll dann paarweise durch beide Iterable gelaufen werden.
+
+c) Oft braucht man die Situation, dass man über zwei Dimensionen iteriert. Hierzu hat man für jede Dimension 
+einen eigenen Iterator. Man kann sich das so vorstellen, dass, wenn man an ein übliches Koordinatensystem
+denkt, die eine Dimension die Punkte auf der x-Achse ist, die zweite Dimension die Punkte auf der y-Achse. 
+Soll über den zweidimensionalen Raum iteriert werden, so wird ein Iterator benötigt, der über alle möglichen 
+(x,y) Paare iteriert. Schreiben Sie eine generische Iteratorklasse TwoDimIterable<A,B>. Sie soll in einem 
+Konstruktor zwei iterierbare Objekte übergeben bekommen:
+public TwoDimIterable(Iterable<A> it1, Iterable<B> it2)
+
+d) Schreiben Sie eine generische Iterableklasse Interleave<A>. Sie soll in einem Konstruktor zwei iterierbare 
+Objekte übergeben bekommen. Die resultierende Iteration, soll abwechselnd aus den beiden Iterable, die El-
+emente beziehen, bis einer der beiden Iteratoren kein weiteres Element liefert.
