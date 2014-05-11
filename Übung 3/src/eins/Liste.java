@@ -11,14 +11,14 @@ class Liste<A> implements OurList<A>{
 	private OurList<A> tail;
 	private int size;
 	
+	public Liste() {
+		this(null, null);
+	}
+	
 	public Liste(A head, OurList<A> tail) {
 		this.head = head;
 		this.tail = tail;
 		this.size = 0;
-	}
-	
-	public Liste() {
-		this(null, null);
 	}
 	
 	@SuppressWarnings("unchecked")

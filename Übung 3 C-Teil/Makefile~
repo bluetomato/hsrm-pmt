@@ -1,0 +1,10 @@
+all:list
+
+list:list.c
+	gcc -ansi -Wall list.c -o list
+
+clean:
+	rm -f gesamt *~
+
+run:
+	./list
