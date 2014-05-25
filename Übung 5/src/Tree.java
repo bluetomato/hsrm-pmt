@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -16,12 +17,14 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 class Tree<E>{
 	E elem;
 	boolean isNil;
     List<Tree<E>> children = new ArrayList<>();
+    E parent = null;
 
     Tree(){
     	isNil = true;
@@ -135,33 +138,75 @@ class Tree<E>{
 		return newTree;
 	}
 	
-	public void writeAsXML(java.io.Writer out) throws IOException
+	public void writeAsXML(java.io.Writer out, int dummy) throws IOException
 	{
 		if (!isNil){
-    		for (Tree<E> child:children){
-    			child.writeAsXML(out);
+			out.write("<name>" + elem.toString() + "</name> \n"); 
+			for (Tree<E> child:children){
+				if(children.size() > 0){
+					out.write("<child>\n");
+				}
+    			child.writeAsXML(out, 1);
+    			if(children.size() > 0){
+    				out.write("</child>\n");
+    			}
     		}
-    		out.write(elem.toString());
     	}
-		
+	}
+	
+	public void writeAsXML(java.io.Writer out) throws IOException
+	{
+		out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		out.write("<person>\n");
+		writeAsXML(out, 1);
+		out.write("</person>\n");
+	}
+	
+	public static Tree<String> readFromXML(java.io.File xmlFile) throws Exception
+	{
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder parser = factory.newDocumentBuilder();
+		Document doc = parser.parse(xmlFile);
+		Element root = doc.getDocumentElement();
+
+
+		return buildStringTree(root.getFirstChild());	
 	}
 
-    static public void main(String[] args){
+	private static Tree<String> buildStringTree(Node node) {
+		NodeList childList = node.getChildNodes();	//every node has his name and his childnodes in his childList
+		int listLength = childList.getLength();	//important for the loop
+
+//		Tree<String> stringTree = new Tree<>(childList.item(0).getTextContent());	/*first child always the name
+//		-> interesting for the String Tree*/
+//		for(int i = 1; i < listLength; i++) {	
+//			stringTree.childNodes.add(buildStringTree(childList.item(i)));	/*other elements of thechildNode List are the real children */
+//		}
+
+
+		return null; // stringTree;
+	}
+	
+	static public void main(String[] args){
     	Tree<String> windsor
-    		= new Tree<>("George"
-    			,new Tree<>("Elizabeth"
-				     ,new Tree<>("Charles"
-						 ,new Tree<>("William"
-								 ,new Tree<>("George")
-							     )
-						 ,new Tree<>("Harry")
-						 )
-				     ,new Tree<>("Anne")
-				     ,new Tree<>("Andrew")
-				     ,new Tree<>("Edward")
-				     )
-			 ,new Tree<>("Margret")
-			 ) ;
+    		= new Tree<>("Vater", 
+    				new Tree<>("Kind mit Kindern", 
+    						new Tree<> ("Kindeskind")), 
+    				new Tree<>("Kind ohne Kinder"));
+//    		= new Tree<>("George"
+//    			,new Tree<>("Elizabeth"
+//				     ,new Tree<>("Charles"
+//						 ,new Tree<>("William"
+//								 ,new Tree<>("George")
+//							     )
+//						 ,new Tree<>("Harry")
+//						 )
+//				     ,new Tree<>("Anne")
+//				     ,new Tree<>("Andrew")
+//				     ,new Tree<>("Edward")
+//				     )
+//			 ,new Tree<>("Margret")
+//			 ) ;
 	System.out.println(windsor.size());
 	windsor.fuerAlle(x ->  System.out.println(x));
 	System.out.println("############################");
@@ -173,14 +218,22 @@ class Tree<E>{
 	System.out.println(windsor.contains((String s)->{return s.startsWith("G");}));
 	
 	try {
-		Writer writer = new FileWriter("test.txt");
+		Writer writer = new FileWriter("test.xml");
 		windsor.writeAsXML(writer);
 		writer.close();
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
 	
-	System.out.println();
+	try {
+		Tree<String> xmlToTreeTree = new Tree<>();
+		File xmlFile = new File("test.xml");
+		xmlToTreeTree = readFromXML(xmlFile);
+		//System.out.println(xmlToTreeTree.toString());
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
 
 }
