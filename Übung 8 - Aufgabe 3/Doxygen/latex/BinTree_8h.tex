@@ -1,0 +1,290 @@
+\hypertarget{BinTree_8h}{\section{Bin\-Tree.\-h File Reference}
+\label{BinTree_8h}\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}}
+}
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Array\-List.\-h\char`\"{}}\\*
+Include dependency graph for Bin\-Tree.\-h\-:
+This graph shows which files directly or indirectly include this file\-:
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structTR}{T\-R}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef bool \hyperlink{BinTree_8h_ae89f9f095232167d2e3cc1a0a3e8cf1c}{le} (void $\ast$, void $\ast$)
+\item 
+\hypertarget{BinTree_8h_af3967592d7eaefefa61c238f5e2c5e8c}{typedef struct \hyperlink{structTR}{T\-R} {\bfseries Tree}}\label{BinTree_8h_af3967592d7eaefefa61c238f5e2c5e8c}
+
+\item 
+typedef unsigned int \hyperlink{BinTree_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{BinTree_8h_ac1fdfaf4ec920e15f0d7ec300bc0b5c0}{is\-Empty} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+\hyperlink{structTR}{Tree} $\ast$ \hyperlink{BinTree_8h_a63105092ab2c09d637b4aca89e1ff0ce}{new\-Empty\-Tree} (\hyperlink{BinTree_8h_ae89f9f095232167d2e3cc1a0a3e8cf1c}{le} kleiner\-Gleich)
+\item 
+\hyperlink{structTR}{Tree} $\ast$ \hyperlink{BinTree_8h_ae63e49ec0f31d9cf356de5934173874f}{new\-Leaf\-Tree} (\hyperlink{BinTree_8h_ae89f9f095232167d2e3cc1a0a3e8cf1c}{le} kleiner\-Gleich, void $\ast$elem)
+\item 
+void \hyperlink{BinTree_8h_a281ce0d06d228e22cbed09e536c34e7a}{delete\-Tree} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+\hyperlink{BinTree_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} \hyperlink{BinTree_8h_a5b6e22532bd599ff63cab25ddcc031e9}{length} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+void \hyperlink{BinTree_8h_a05013e748138135877661f53ed1c0a52}{add} (\hyperlink{structTR}{Tree} $\ast$this, void $\ast$el)
+\item 
+\hyperlink{structTR}{Tree} $\ast$ \hyperlink{BinTree_8h_af5223bfff329ef0c40a1de0280831242}{copy\-Tree} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+bool \hyperlink{BinTree_8h_a4af724e7870a3f987bf5ff1b57492539}{contains} (\hyperlink{structTR}{Tree} $\ast$this, void $\ast$elem)
+\item 
+void \hyperlink{BinTree_8h_a96ead61195849a300cf9572bf6a4c2fe}{mache\-Fuer\-Alle} (\hyperlink{structTR}{Tree} $\ast$this, void consumer(void $\ast$))
+\item 
+bool \hyperlink{BinTree_8h_a9b6b09c6ac0fa83ea8f6f5b3776b735d}{kl\-Gl\-Char} (void $\ast$w1, void $\ast$w2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{mainBinTree_8c}{main\-Bin\-Tree.\-c}
+
+\begin{DoxyAuthor}{Author}
+Stephanie Scholl 
+\end{DoxyAuthor}
+\begin{DoxyNote}{Note}
+Matrikelnummer\-: 979993 
+
+Hochschule Rhein\-Main
+
+Fach\-: Programmiermethoden-\/ und Techniken 
+
+2. Semester 
+
+Projektarbeit
+
+Professor\-: Sven Eric Panitz 
+
+Praktikumsleiter\-: Christian Lassmann 
+\end{DoxyNote}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{BinTree_8h_ae89f9f095232167d2e3cc1a0a3e8cf1c}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!le@{le}}
+\index{le@{le}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{le}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool le(void $\ast$, void $\ast$)}}\label{BinTree_8h_ae89f9f095232167d2e3cc1a0a3e8cf1c}
+typedef for function le
+
+
+\begin{DoxyParams}{Parameters}
+{\em void$\ast$} & -\/ first object \\
+\hline
+{\em void$\ast$} & -\/ second object\\
+\hline
+\end{DoxyParams}
+return 1 if the first object is smaller/equals the second, else 0function le \hypertarget{BinTree_8h_a56638ee9d162e8cce3a15f92d2023d6e}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!nat@{nat}}
+\index{nat@{nat}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{nat}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int {\bf nat}}}\label{BinTree_8h_a56638ee9d162e8cce3a15f92d2023d6e}
+typedef nat for an unsigned int 
+
+\subsection{Function Documentation}
+\hypertarget{BinTree_8h_a05013e748138135877661f53ed1c0a52}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!add@{add}}
+\index{add@{add}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void add (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{void $\ast$}]{el}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_a05013e748138135877661f53ed1c0a52}
+Function for adding an element to a given tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree where the element is going to be added \\
+\hline
+{\em el} & void$\ast$ -\/ Object which is going to be added \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{BinTree_8h_a4af724e7870a3f987bf5ff1b57492539}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!contains@{contains}}
+\index{contains@{contains}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{contains}]{\setlength{\rightskip}{0pt plus 5cm}bool contains (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{void $\ast$}]{elem}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_a4af724e7870a3f987bf5ff1b57492539}
+Function for checking if there's a particular object in the tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be checked \\
+\hline
+{\em elem} & void$\ast$ -\/ object to search for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\-R\-U\-E if the object is in the tree, else F\-A\-L\-S\-E 
+\end{DoxyReturn}
+\hypertarget{BinTree_8h_af5223bfff329ef0c40a1de0280831242}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!copy\-Tree@{copy\-Tree}}
+\index{copy\-Tree@{copy\-Tree}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{copy\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree}$\ast$ copy\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_af5223bfff329ef0c40a1de0280831242}
+Copies tree but not the elements
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be copied\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+copied tree 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{BinTree_8h_a281ce0d06d228e22cbed09e536c34e7a}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!delete\-Tree@{delete\-Tree}}
+\index{delete\-Tree@{delete\-Tree}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{delete\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}void delete\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_a281ce0d06d228e22cbed09e536c34e7a}
+Function for deleting every node of the tree, but not the elements
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be deleted \\
+\hline
+\end{DoxyParams}
+\hypertarget{BinTree_8h_ac1fdfaf4ec920e15f0d7ec300bc0b5c0}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!is\-Empty@{is\-Empty}}
+\index{is\-Empty@{is\-Empty}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{is\-Empty}]{\setlength{\rightskip}{0pt plus 5cm}bool is\-Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_ac1fdfaf4ec920e15f0d7ec300bc0b5c0}
+Checks if a given tree is empty
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be checked\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean T\-R\-U\-E if tree is empty, else F\-A\-L\-S\-E 
+\end{DoxyReturn}
+\hypertarget{BinTree_8h_a9b6b09c6ac0fa83ea8f6f5b3776b735d}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!kl\-Gl\-Char@{kl\-Gl\-Char}}
+\index{kl\-Gl\-Char@{kl\-Gl\-Char}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{kl\-Gl\-Char}]{\setlength{\rightskip}{0pt plus 5cm}bool kl\-Gl\-Char (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{w1, }
+\item[{void $\ast$}]{w2}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_a9b6b09c6ac0fa83ea8f6f5b3776b735d}
+Function for testing if a object is smaller/equal as another
+
+
+\begin{DoxyParams}{Parameters}
+{\em w1} & void$\ast$ -\/ first object \\
+\hline
+{\em w2} & void$\ast$ -\/ second object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the first element is smaller or equals the other, else 0 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{BinTree_8h_a5b6e22532bd599ff63cab25ddcc031e9}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!length@{length}}
+\index{length@{length}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}{\bf nat} length (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_a5b6e22532bd599ff63cab25ddcc031e9}
+Function for calculating the size of a tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree where the nodes are going to be counted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size of tree as unsigned int 
+\end{DoxyReturn}
+\hypertarget{BinTree_8h_a96ead61195849a300cf9572bf6a4c2fe}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!mache\-Fuer\-Alle@{mache\-Fuer\-Alle}}
+\index{mache\-Fuer\-Alle@{mache\-Fuer\-Alle}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{mache\-Fuer\-Alle}]{\setlength{\rightskip}{0pt plus 5cm}void mache\-Fuer\-Alle (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{void }]{consumervoid $\ast$}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_a96ead61195849a300cf9572bf6a4c2fe}
+Function for applying a consumer to every single element inorder of the tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree to go through \\
+\hline
+{\em consumer} & void -\/ Function which is going to be applied \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{BinTree_8h_a63105092ab2c09d637b4aca89e1ff0ce}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!new\-Empty\-Tree@{new\-Empty\-Tree}}
+\index{new\-Empty\-Tree@{new\-Empty\-Tree}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{new\-Empty\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree}$\ast$ new\-Empty\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf le}}]{kleiner\-Gleich}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_a63105092ab2c09d637b4aca89e1ff0ce}
+Creates a new empty tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em kleiner\-Gleich} & le Functionpointer to function which checks if an element is smaller oder bigger/equal to another\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new leaf tree without a leaf 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{BinTree_8h_ae63e49ec0f31d9cf356de5934173874f}{\index{Bin\-Tree.\-h@{Bin\-Tree.\-h}!new\-Leaf\-Tree@{new\-Leaf\-Tree}}
+\index{new\-Leaf\-Tree@{new\-Leaf\-Tree}!BinTree.h@{Bin\-Tree.\-h}}
+\subsubsection[{new\-Leaf\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree}$\ast$ new\-Leaf\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf le}}]{kleiner\-Gleich, }
+\item[{void $\ast$}]{elem}
+\end{DoxyParamCaption}
+)}}\label{BinTree_8h_ae63e49ec0f31d9cf356de5934173874f}
+Creates a new tree with a root element
+
+
+\begin{DoxyParams}{Parameters}
+{\em kleiner\-Gleich} & le -\/ Functionpointer to function which checks if an element is smaller oder bigger/equal to another \\
+\hline
+{\em elem} & void$\ast$ -\/ element which is the new root\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new leaf tree with a leaf 
+\end{DoxyReturn}

@@ -1,0 +1,199 @@
+\hypertarget{ArrayList_8c}{\section{Array\-List.\-c File Reference}
+\label{ArrayList_8c}\index{Array\-List.\-c@{Array\-List.\-c}}
+}
+{\ttfamily \#include \char`\"{}Array\-List.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+Include dependency graph for Array\-List.\-c\-:
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structArrayList}{Array\-List} \hyperlink{ArrayList_8c_a917645b32d1c6b18e2509efa98325e20}{al\-Create} ()
+\item 
+\hyperlink{structArrayList}{Array\-List} $\ast$ \hyperlink{ArrayList_8c_aea5a67c196a6305595e09feda4bbb7a0}{al\-Create\-P} ()
+\item 
+void \hyperlink{ArrayList_8c_a4f230a77fd84672fdbc9bc883397c0cd}{al\-Add} (\hyperlink{structArrayList}{Array\-List} $\ast$this, \hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object} object)
+\item 
+void \hyperlink{ArrayList_8c_ac53b345c1a276a0e5ee28c4f1e2e6354}{al\-For\-Each} (\hyperlink{structArrayList}{Array\-List} this, \hyperlink{ArrayList_8h_a66ef8f2514ed6dbb7269939a6d3c6ba2}{Consumer} cs)
+\item 
+\hyperlink{structArrayList}{Array\-List} $\ast$ \hyperlink{ArrayList_8c_a9abfd8f2caef3c9dcffecf32088d5964}{al\-Copy} (\hyperlink{structArrayList}{Array\-List} that)
+\item 
+void \hyperlink{ArrayList_8c_a9d4ad7282bb6a7112f9e184b776c34bd}{al\-Delete} (\hyperlink{structArrayList}{Array\-List} this)
+\item 
+\hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object} \hyperlink{ArrayList_8c_a04c91f255c9abc34428f978e8ef7d012}{al\-Get} (\hyperlink{structArrayList}{Array\-List} this, unsigned int index)
+\item 
+void \hyperlink{ArrayList_8c_a48fe54f42dd0a91f5521990db132be97}{al\-Sort} (\hyperlink{structArrayList}{Array\-List} this, \hyperlink{ArrayList_8h_aa96f19b92f56cc59921c20b52472d58e}{Relation\-Le} rel)
+\item 
+int \hyperlink{ArrayList_8c_a29be10ad2354d827d928603d317aeb21}{al\-Write\-As\-X\-M\-L} (\hyperlink{structArrayList}{Array\-List} this, \hyperlink{ArrayList_8h_a98bf1e7ca928f654d50593bfd3d78567}{To\-String} ts, char $\ast$file\-Name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents an \hyperlink{structArrayList}{Array\-List}
+
+\begin{DoxyAuthor}{Author}
+Stephanie Scholl 
+\end{DoxyAuthor}
+\begin{DoxyNote}{Note}
+Matrikelnummer\-: 979993 
+
+Hochschule Rhein\-Main
+
+Fach\-: Programmiermethoden-\/ und Techniken 
+
+2. Semester 
+
+Projektarbeit
+
+Professor\-: Sven Eric Panitz 
+
+Praktikumsleiter\-: Christian Lassmann 
+\end{DoxyNote}
+
+
+\subsection{Function Documentation}
+\hypertarget{ArrayList_8c_a4f230a77fd84672fdbc9bc883397c0cd}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Add@{al\-Add}}
+\index{al\-Add@{al\-Add}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Add}]{\setlength{\rightskip}{0pt plus 5cm}void al\-Add (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List} $\ast$}]{this, }
+\item[{{\bf Object}}]{object}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_a4f230a77fd84672fdbc9bc883397c0cd}
+Function for adding an Object to a given \hyperlink{structArrayList}{Array\-List}
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Array\-List$\ast$ List where the object is added \\
+\hline
+{\em object} & void$\ast$ Object to add to the List \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8c_a9abfd8f2caef3c9dcffecf32088d5964}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Copy@{al\-Copy}}
+\index{al\-Copy@{al\-Copy}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Array\-List}$\ast$ al\-Copy (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{that}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_a9abfd8f2caef3c9dcffecf32088d5964}
+Function for copying a \hyperlink{structArrayList}{Array\-List}
+
+
+\begin{DoxyParams}{Parameters}
+{\em that} & \hyperlink{structArrayList}{Array\-List} -\/ List which is copied \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{ArrayList_8c_a917645b32d1c6b18e2509efa98325e20}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Create@{al\-Create}}
+\index{al\-Create@{al\-Create}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Create}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Array\-List} al\-Create (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_a917645b32d1c6b18e2509efa98325e20}
+Creates a new empty \hyperlink{structArrayList}{Array\-List} Capacity is 5, Size is 0, Data is allocated \begin{DoxyReturn}{Returns}
+empty \hyperlink{structArrayList}{Array\-List} 
+\end{DoxyReturn}
+\hypertarget{ArrayList_8c_aea5a67c196a6305595e09feda4bbb7a0}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Create\-P@{al\-Create\-P}}
+\index{al\-Create\-P@{al\-Create\-P}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Create\-P}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Array\-List}$\ast$ al\-Create\-P (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_aea5a67c196a6305595e09feda4bbb7a0}
+Creates a Pointer of a new empty \hyperlink{structArrayList}{Array\-List} Capacity is 5, Size is 0 \begin{DoxyReturn}{Returns}
+pointer to new empty \hyperlink{structArrayList}{Array\-List} 
+\end{DoxyReturn}
+\hypertarget{ArrayList_8c_a9d4ad7282bb6a7112f9e184b776c34bd}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Delete@{al\-Delete}}
+\index{al\-Delete@{al\-Delete}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Delete}]{\setlength{\rightskip}{0pt plus 5cm}void al\-Delete (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_a9d4ad7282bb6a7112f9e184b776c34bd}
+Function for deleting an existing \hyperlink{structArrayList}{Array\-List}
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List which is going to be deleted \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8c_ac53b345c1a276a0e5ee28c4f1e2e6354}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-For\-Each@{al\-For\-Each}}
+\index{al\-For\-Each@{al\-For\-Each}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-For\-Each}]{\setlength{\rightskip}{0pt plus 5cm}void al\-For\-Each (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{{\bf Consumer}}]{cs}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_ac53b345c1a276a0e5ee28c4f1e2e6354}
+Function for walking through a whole List and apply a consumer to every Element
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List you want to go through \\
+\hline
+{\em cs} & Consumer -\/ consumer you want to apply \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8c_a04c91f255c9abc34428f978e8ef7d012}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Get@{al\-Get}}
+\index{al\-Get@{al\-Get}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object} al\-Get (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_a04c91f255c9abc34428f978e8ef7d012}
+Function for getting the data of an \hyperlink{structArrayList}{Array\-List} on a specific index
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List where the index is beeing looked up \\
+\hline
+{\em index} & unsigned int -\/ Index of the List\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object at the index' position of the List, if there's no such index return N\-U\-L\-L 
+\end{DoxyReturn}
+\hypertarget{ArrayList_8c_a48fe54f42dd0a91f5521990db132be97}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Sort@{al\-Sort}}
+\index{al\-Sort@{al\-Sort}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Sort}]{\setlength{\rightskip}{0pt plus 5cm}void al\-Sort (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{{\bf Relation\-Le}}]{rel}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_a48fe54f42dd0a91f5521990db132be97}
+Function for sorting an \hyperlink{structArrayList}{Array\-List} with an relation
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List which is beeing sorted \\
+\hline
+{\em rel} & Relation\-Le -\/ Relation which is beeing applied \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8c_a29be10ad2354d827d928603d317aeb21}{\index{Array\-List.\-c@{Array\-List.\-c}!al\-Write\-As\-X\-M\-L@{al\-Write\-As\-X\-M\-L}}
+\index{al\-Write\-As\-X\-M\-L@{al\-Write\-As\-X\-M\-L}!ArrayList.c@{Array\-List.\-c}}
+\subsubsection[{al\-Write\-As\-X\-M\-L}]{\setlength{\rightskip}{0pt plus 5cm}int al\-Write\-As\-X\-M\-L (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{{\bf To\-String}}]{ts, }
+\item[{char $\ast$}]{file\-Name}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8c_a29be10ad2354d827d928603d317aeb21}
+Function for writing an \hyperlink{structArrayList}{Array\-List} to a X\-M\-L file
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List which is going to be written \\
+\hline
+{\em ts} & To\-String -\/ to\-String-\/\-Method \\
+\hline
+{\em file\-Name} & char$\ast$ -\/ filename for the new X\-M\-L file\\
+\hline
+\end{DoxyParams}
+return 0 if everything went well, else 1 

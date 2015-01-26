@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['deletebmp',['deleteBmp',['../BMP_8c.html#ad99617869bf6b7cd4ec414cd95330dc4',1,'deleteBmp(Bmp *this):&#160;BMP.c'],['../BMP_8h.html#ad99617869bf6b7cd4ec414cd95330dc4',1,'deleteBmp(Bmp *this):&#160;BMP.c']]],
+  ['drawcoordinatesystem',['drawCoordinateSystem',['../BMP_8c.html#af3e1bb2741a1278497cb9d0fb2dd0d2e',1,'drawCoordinateSystem(Bmp *this, const double size, double minX, double minY, double skalX, double skalY, int margin):&#160;BMP.c'],['../BMP_8h.html#af3e1bb2741a1278497cb9d0fb2dd0d2e',1,'drawCoordinateSystem(Bmp *this, const double size, double minX, double minY, double skalX, double skalY, int margin):&#160;BMP.c']]],
+  ['drawgraph',['drawGraph',['../BMP_8c.html#a4d3767dfa28b01276b84b15eb855c19f',1,'drawGraph(double f(double), double minX, double maxX):&#160;BMP.c'],['../BMP_8h.html#a4d3767dfa28b01276b84b15eb855c19f',1,'drawGraph(double f(double), double minX, double maxX):&#160;BMP.c']]],
+  ['drawgraphwithdiffs',['drawGraphWithDiffs',['../BMP_8c.html#a680da8290665d4a7296e8b9268ee9a2b',1,'drawGraphWithDiffs(double f(double), double minX, double maxX, unsigned int numberOfDiffs):&#160;BMP.c'],['../BMP_8h.html#a680da8290665d4a7296e8b9268ee9a2b',1,'drawGraphWithDiffs(double f(double), double minX, double maxX, unsigned int numberOfDiffs):&#160;BMP.c']]],
+  ['drawline',['drawLine',['../BMP_8c.html#af71fa403d346e7ce70f232707886bd30',1,'drawLine(Bmp *this, Color c, int fromX, int fromY, int toX, int toY):&#160;BMP.c'],['../BMP_8h.html#af71fa403d346e7ce70f232707886bd30',1,'drawLine(Bmp *this, Color c, int fromX, int fromY, int toX, int toY):&#160;BMP.c']]]
+];

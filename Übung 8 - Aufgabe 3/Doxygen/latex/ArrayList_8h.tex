@@ -1,0 +1,208 @@
+\hypertarget{ArrayList_8h}{\section{Array\-List.\-h File Reference}
+\label{ArrayList_8h}\index{Array\-List.\-h@{Array\-List.\-h}}
+}
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+Include dependency graph for Array\-List.\-h\-:
+This graph shows which files directly or indirectly include this file\-:
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structArrayList}{Array\-List}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$ \hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object}
+\item 
+typedef bool \hyperlink{ArrayList_8h_aa96f19b92f56cc59921c20b52472d58e}{Relation\-Le} (\hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object}, \hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object})
+\item 
+typedef char $\ast$ \hyperlink{ArrayList_8h_a98bf1e7ca928f654d50593bfd3d78567}{To\-String} (\hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object})
+\item 
+typedef void \hyperlink{ArrayList_8h_a66ef8f2514ed6dbb7269939a6d3c6ba2}{Consumer} (\hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object})
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structArrayList}{Array\-List} \hyperlink{ArrayList_8h_a917645b32d1c6b18e2509efa98325e20}{al\-Create} ()
+\item 
+void \hyperlink{ArrayList_8h_a9d4ad7282bb6a7112f9e184b776c34bd}{al\-Delete} (\hyperlink{structArrayList}{Array\-List} this)
+\item 
+void \hyperlink{ArrayList_8h_a4f230a77fd84672fdbc9bc883397c0cd}{al\-Add} (\hyperlink{structArrayList}{Array\-List} $\ast$this, \hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object} object)
+\item 
+\hyperlink{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{Object} \hyperlink{ArrayList_8h_a04c91f255c9abc34428f978e8ef7d012}{al\-Get} (\hyperlink{structArrayList}{Array\-List} this, unsigned int index)
+\item 
+void \hyperlink{ArrayList_8h_a48fe54f42dd0a91f5521990db132be97}{al\-Sort} (\hyperlink{structArrayList}{Array\-List} this, \hyperlink{ArrayList_8h_aa96f19b92f56cc59921c20b52472d58e}{Relation\-Le} rel)
+\item 
+void \hyperlink{ArrayList_8h_ac53b345c1a276a0e5ee28c4f1e2e6354}{al\-For\-Each} (\hyperlink{structArrayList}{Array\-List} this, \hyperlink{ArrayList_8h_a66ef8f2514ed6dbb7269939a6d3c6ba2}{Consumer} cs)
+\item 
+int \hyperlink{ArrayList_8h_a29be10ad2354d827d928603d317aeb21}{al\-Write\-As\-X\-M\-L} (\hyperlink{structArrayList}{Array\-List} this, \hyperlink{ArrayList_8h_a98bf1e7ca928f654d50593bfd3d78567}{To\-String} ts, char $\ast$file\-Name)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header file for \hyperlink{ArrayList_8c}{Array\-List.\-c}
+
+\begin{DoxyAuthor}{Author}
+Sven Eric Panitz 
+\end{DoxyAuthor}
+\begin{DoxyNote}{Note}
+Hochschule Rhein\-Main
+
+Fach\-: Programmiermethoden-\/ und Techniken 
+
+2. Semester 
+
+Projektarbeit
+
+Professor\-: Sven Eric Panitz 
+
+Praktikumsleiter\-: Christian Lassmann 
+\end{DoxyNote}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{ArrayList_8h_a66ef8f2514ed6dbb7269939a6d3c6ba2}{\index{Array\-List.\-h@{Array\-List.\-h}!Consumer@{Consumer}}
+\index{Consumer@{Consumer}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{Consumer}]{\setlength{\rightskip}{0pt plus 5cm}typedef void Consumer({\bf Object})}}\label{ArrayList_8h_a66ef8f2514ed6dbb7269939a6d3c6ba2}
+This function will do something with an object. Usually it has some side effect, like io operations. \hypertarget{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}{\index{Array\-List.\-h@{Array\-List.\-h}!Object@{Object}}
+\index{Object@{Object}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{Object}]{\setlength{\rightskip}{0pt plus 5cm}typedef void$\ast$ {\bf Object}}}\label{ArrayList_8h_a6c6a43427b3458a4b2bf59b2db3995c3}
+We want to implement a generic list for different types. This is done via a void$\ast$, which is regarded as an general object. \hypertarget{ArrayList_8h_aa96f19b92f56cc59921c20b52472d58e}{\index{Array\-List.\-h@{Array\-List.\-h}!Relation\-Le@{Relation\-Le}}
+\index{Relation\-Le@{Relation\-Le}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{Relation\-Le}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool Relation\-Le({\bf Object}, {\bf Object})}}\label{ArrayList_8h_aa96f19b92f56cc59921c20b52472d58e}
+This function will be used for comparing objects in a sort function. \hypertarget{ArrayList_8h_a98bf1e7ca928f654d50593bfd3d78567}{\index{Array\-List.\-h@{Array\-List.\-h}!To\-String@{To\-String}}
+\index{To\-String@{To\-String}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{To\-String}]{\setlength{\rightskip}{0pt plus 5cm}typedef char$\ast$ To\-String({\bf Object})}}\label{ArrayList_8h_a98bf1e7ca928f654d50593bfd3d78567}
+This function will generate a string representation of the given object. A new string will be allocated and needs to get a call to free. 
+
+\subsection{Function Documentation}
+\hypertarget{ArrayList_8h_a4f230a77fd84672fdbc9bc883397c0cd}{\index{Array\-List.\-h@{Array\-List.\-h}!al\-Add@{al\-Add}}
+\index{al\-Add@{al\-Add}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{al\-Add}]{\setlength{\rightskip}{0pt plus 5cm}void al\-Add (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List} $\ast$}]{this, }
+\item[{{\bf Object}}]{object}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8h_a4f230a77fd84672fdbc9bc883397c0cd}
+This function add a further element to the end of the list. If the capacity is not sufficient, a new internal data store is allocated and the elements are copied to the new store. Then the old data store needs a call to free, which is done within this function.
+
+Function for adding an Object to a given \hyperlink{structArrayList}{Array\-List}
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Array\-List$\ast$ List where the object is added \\
+\hline
+{\em object} & void$\ast$ Object to add to the List \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8h_a917645b32d1c6b18e2509efa98325e20}{\index{Array\-List.\-h@{Array\-List.\-h}!al\-Create@{al\-Create}}
+\index{al\-Create@{al\-Create}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{al\-Create}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Array\-List} al\-Create (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8h_a917645b32d1c6b18e2509efa98325e20}
+This function will generate a new \hyperlink{structArrayList}{Array\-List}. It has some initial capacity. The internal data store gets allocated. The initial size is 0.
+
+Creates a new empty \hyperlink{structArrayList}{Array\-List} Capacity is 5, Size is 0, Data is allocated \begin{DoxyReturn}{Returns}
+empty \hyperlink{structArrayList}{Array\-List} 
+\end{DoxyReturn}
+\hypertarget{ArrayList_8h_a9d4ad7282bb6a7112f9e184b776c34bd}{\index{Array\-List.\-h@{Array\-List.\-h}!al\-Delete@{al\-Delete}}
+\index{al\-Delete@{al\-Delete}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{al\-Delete}]{\setlength{\rightskip}{0pt plus 5cm}void al\-Delete (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8h_a9d4ad7282bb6a7112f9e184b776c34bd}
+This function will free the allocated data store of the given \hyperlink{structArrayList}{Array\-List}.
+
+Function for deleting an existing \hyperlink{structArrayList}{Array\-List}
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List which is going to be deleted \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8h_ac53b345c1a276a0e5ee28c4f1e2e6354}{\index{Array\-List.\-h@{Array\-List.\-h}!al\-For\-Each@{al\-For\-Each}}
+\index{al\-For\-Each@{al\-For\-Each}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{al\-For\-Each}]{\setlength{\rightskip}{0pt plus 5cm}void al\-For\-Each (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{{\bf Consumer}}]{cs}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8h_ac53b345c1a276a0e5ee28c4f1e2e6354}
+Performs the Consumer function to each element.
+
+Function for walking through a whole List and apply a consumer to every Element
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List you want to go through \\
+\hline
+{\em cs} & Consumer -\/ consumer you want to apply \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8h_a04c91f255c9abc34428f978e8ef7d012}{\index{Array\-List.\-h@{Array\-List.\-h}!al\-Get@{al\-Get}}
+\index{al\-Get@{al\-Get}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{al\-Get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object} al\-Get (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{unsigned int}]{index}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8h_a04c91f255c9abc34428f978e8ef7d012}
+Returns the element at a given index. If the given index is greater or equal to the size, then N\-U\-L\-L will be returned.
+
+Function for getting the data of an \hyperlink{structArrayList}{Array\-List} on a specific index
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List where the index is beeing looked up \\
+\hline
+{\em index} & unsigned int -\/ Index of the List\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object at the index' position of the List, if there's no such index return N\-U\-L\-L 
+\end{DoxyReturn}
+\hypertarget{ArrayList_8h_a48fe54f42dd0a91f5521990db132be97}{\index{Array\-List.\-h@{Array\-List.\-h}!al\-Sort@{al\-Sort}}
+\index{al\-Sort@{al\-Sort}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{al\-Sort}]{\setlength{\rightskip}{0pt plus 5cm}void al\-Sort (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{{\bf Relation\-Le}}]{rel}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8h_a48fe54f42dd0a91f5521990db132be97}
+Sorts the list in place with a given relation. Bubble sort is used a sotring algorithm.
+
+Function for sorting an \hyperlink{structArrayList}{Array\-List} with an relation
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List which is beeing sorted \\
+\hline
+{\em rel} & Relation\-Le -\/ Relation which is beeing applied \\
+\hline
+\end{DoxyParams}
+\hypertarget{ArrayList_8h_a29be10ad2354d827d928603d317aeb21}{\index{Array\-List.\-h@{Array\-List.\-h}!al\-Write\-As\-X\-M\-L@{al\-Write\-As\-X\-M\-L}}
+\index{al\-Write\-As\-X\-M\-L@{al\-Write\-As\-X\-M\-L}!ArrayList.h@{Array\-List.\-h}}
+\subsubsection[{al\-Write\-As\-X\-M\-L}]{\setlength{\rightskip}{0pt plus 5cm}int al\-Write\-As\-X\-M\-L (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{this, }
+\item[{{\bf To\-String}}]{ts, }
+\item[{char $\ast$}]{file\-Name}
+\end{DoxyParamCaption}
+)}}\label{ArrayList_8h_a29be10ad2354d827d928603d317aeb21}
+Writes an X\-M\-L file, which represents the list. The elements are converted into strings by the given To\-String function. The temporary created string results of the To\-String function will get a call to free.
+
+Function for writing an \hyperlink{structArrayList}{Array\-List} to a X\-M\-L file
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & \hyperlink{structArrayList}{Array\-List} -\/ List which is going to be written \\
+\hline
+{\em ts} & To\-String -\/ to\-String-\/\-Method \\
+\hline
+{\em file\-Name} & char$\ast$ -\/ filename for the new X\-M\-L file\\
+\hline
+\end{DoxyParams}
+return 0 if everything went well, else 1 

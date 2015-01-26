@@ -1,0 +1,300 @@
+\hypertarget{mainBinTree_8c}{\section{main\-Bin\-Tree.\-c File Reference}
+\label{mainBinTree_8c}\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Bin\-Tree.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Array\-List.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Reimwoerterbuch.\-h\char`\"{}}\\*
+Include dependency graph for main\-Bin\-Tree.\-c\-:
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{mainBinTree_8c_ac1fdfaf4ec920e15f0d7ec300bc0b5c0}{is\-Empty} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+\hyperlink{structTR}{Tree} $\ast$ \hyperlink{mainBinTree_8c_a63105092ab2c09d637b4aca89e1ff0ce}{new\-Empty\-Tree} (\hyperlink{BinTree_8h_ae89f9f095232167d2e3cc1a0a3e8cf1c}{le} kleiner\-Gleich)
+\item 
+\hyperlink{structTR}{Tree} $\ast$ \hyperlink{mainBinTree_8c_ae63e49ec0f31d9cf356de5934173874f}{new\-Leaf\-Tree} (\hyperlink{BinTree_8h_ae89f9f095232167d2e3cc1a0a3e8cf1c}{le} kleiner\-Gleich, void $\ast$elem)
+\item 
+void \hyperlink{mainBinTree_8c_a281ce0d06d228e22cbed09e536c34e7a}{delete\-Tree} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+\hyperlink{BinTree_8h_a56638ee9d162e8cce3a15f92d2023d6e}{nat} \hyperlink{mainBinTree_8c_a5b6e22532bd599ff63cab25ddcc031e9}{length} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+void \hyperlink{mainBinTree_8c_a05013e748138135877661f53ed1c0a52}{add} (\hyperlink{structTR}{Tree} $\ast$this, void $\ast$el)
+\item 
+\hyperlink{structTR}{Tree} $\ast$ \hyperlink{mainBinTree_8c_af5223bfff329ef0c40a1de0280831242}{copy\-Tree} (\hyperlink{structTR}{Tree} $\ast$this)
+\item 
+bool \hyperlink{mainBinTree_8c_a4af724e7870a3f987bf5ff1b57492539}{contains} (\hyperlink{structTR}{Tree} $\ast$this, void $\ast$elem)
+\item 
+void \hyperlink{mainBinTree_8c_a96ead61195849a300cf9572bf6a4c2fe}{mache\-Fuer\-Alle} (\hyperlink{structTR}{Tree} $\ast$this, void consumer(void $\ast$))
+\item 
+void \hyperlink{mainBinTree_8c_ab349812bee8290caab67f8d7a61eee92}{mache\-Fuer\-Alle\-Post} (\hyperlink{structTR}{Tree} $\ast$this, \hyperlink{structArrayList}{Array\-List} $\ast$list, void consumer(void $\ast$, void $\ast$))
+\item 
+void \hyperlink{mainBinTree_8c_a926df3575d6b5d96b67b68f4bbb6dfb8}{mache\-Fuer\-Alle\-Pre} (\hyperlink{structTR}{Tree} $\ast$this, void consumer(void $\ast$))
+\item 
+bool \hyperlink{mainBinTree_8c_a9b6b09c6ac0fa83ea8f6f5b3776b735d}{kl\-Gl\-Char} (void $\ast$w1, void $\ast$w2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a binary tree
+
+\begin{DoxyAuthor}{Author}
+Stephanie Scholl 
+\end{DoxyAuthor}
+\begin{DoxyNote}{Note}
+Matrikelnummer\-: 979993 
+
+Hochschule Rhein\-Main
+
+Fach\-: Programmiermethoden-\/ und Techniken 
+
+2. Semester 
+
+Projektarbeit
+
+Professor\-: Sven Eric Panitz 
+
+Praktikumsleiter\-: Christian Lassmann 
+\end{DoxyNote}
+
+
+\subsection{Function Documentation}
+\hypertarget{mainBinTree_8c_a05013e748138135877661f53ed1c0a52}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!add@{add}}
+\index{add@{add}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void add (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{void $\ast$}]{el}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a05013e748138135877661f53ed1c0a52}
+Function for adding an element to a given tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree where the element is going to be added \\
+\hline
+{\em el} & void$\ast$ -\/ Object which is going to be added \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{mainBinTree_8c_a4af724e7870a3f987bf5ff1b57492539}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!contains@{contains}}
+\index{contains@{contains}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{contains}]{\setlength{\rightskip}{0pt plus 5cm}bool contains (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{void $\ast$}]{elem}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a4af724e7870a3f987bf5ff1b57492539}
+Function for checking if there's a particular object in the tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be checked \\
+\hline
+{\em elem} & void$\ast$ -\/ object to search for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\-R\-U\-E if the object is in the tree, else F\-A\-L\-S\-E 
+\end{DoxyReturn}
+\hypertarget{mainBinTree_8c_af5223bfff329ef0c40a1de0280831242}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!copy\-Tree@{copy\-Tree}}
+\index{copy\-Tree@{copy\-Tree}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{copy\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree}$\ast$ copy\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_af5223bfff329ef0c40a1de0280831242}
+Copies tree but not the elements
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be copied\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+copied tree 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{mainBinTree_8c_a281ce0d06d228e22cbed09e536c34e7a}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!delete\-Tree@{delete\-Tree}}
+\index{delete\-Tree@{delete\-Tree}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{delete\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}void delete\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a281ce0d06d228e22cbed09e536c34e7a}
+Function for deleting every node of the tree, but not the elements
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be deleted \\
+\hline
+\end{DoxyParams}
+\hypertarget{mainBinTree_8c_ac1fdfaf4ec920e15f0d7ec300bc0b5c0}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!is\-Empty@{is\-Empty}}
+\index{is\-Empty@{is\-Empty}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{is\-Empty}]{\setlength{\rightskip}{0pt plus 5cm}bool is\-Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_ac1fdfaf4ec920e15f0d7ec300bc0b5c0}
+Checks if a given tree is empty
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree which is going to be checked\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean T\-R\-U\-E if tree is empty, else F\-A\-L\-S\-E 
+\end{DoxyReturn}
+\hypertarget{mainBinTree_8c_a9b6b09c6ac0fa83ea8f6f5b3776b735d}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!kl\-Gl\-Char@{kl\-Gl\-Char}}
+\index{kl\-Gl\-Char@{kl\-Gl\-Char}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{kl\-Gl\-Char}]{\setlength{\rightskip}{0pt plus 5cm}bool kl\-Gl\-Char (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{w1, }
+\item[{void $\ast$}]{w2}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a9b6b09c6ac0fa83ea8f6f5b3776b735d}
+Function for testing if a object is smaller/equal as another
+
+
+\begin{DoxyParams}{Parameters}
+{\em w1} & void$\ast$ -\/ first object \\
+\hline
+{\em w2} & void$\ast$ -\/ second object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the first element is smaller or equals the other, else 0 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{mainBinTree_8c_a5b6e22532bd599ff63cab25ddcc031e9}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!length@{length}}
+\index{length@{length}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}{\bf nat} length (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a5b6e22532bd599ff63cab25ddcc031e9}
+Function for calculating the size of a tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree where the nodes are going to be counted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size of tree as unsigned int 
+\end{DoxyReturn}
+\hypertarget{mainBinTree_8c_a96ead61195849a300cf9572bf6a4c2fe}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!mache\-Fuer\-Alle@{mache\-Fuer\-Alle}}
+\index{mache\-Fuer\-Alle@{mache\-Fuer\-Alle}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{mache\-Fuer\-Alle}]{\setlength{\rightskip}{0pt plus 5cm}void mache\-Fuer\-Alle (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{void }]{consumervoid $\ast$}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a96ead61195849a300cf9572bf6a4c2fe}
+Function for applying a consumer to every single element inorder of the tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree to go through \\
+\hline
+{\em consumer} & void -\/ Function which is going to be applied \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{mainBinTree_8c_ab349812bee8290caab67f8d7a61eee92}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!mache\-Fuer\-Alle\-Post@{mache\-Fuer\-Alle\-Post}}
+\index{mache\-Fuer\-Alle\-Post@{mache\-Fuer\-Alle\-Post}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{mache\-Fuer\-Alle\-Post}]{\setlength{\rightskip}{0pt plus 5cm}void mache\-Fuer\-Alle\-Post (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{{\bf Array\-List} $\ast$}]{list, }
+\item[{void }]{consumervoid $\ast$, void $\ast$}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_ab349812bee8290caab67f8d7a61eee92}
+Function for applying a consumer to every single element postorder of the tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree to go through \\
+\hline
+{\em list} & Array\-List$\ast$ -\/ list \\
+\hline
+{\em consumer} & void -\/ Function which is going to be applied \\
+\hline
+\end{DoxyParams}
+\hypertarget{mainBinTree_8c_a926df3575d6b5d96b67b68f4bbb6dfb8}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!mache\-Fuer\-Alle\-Pre@{mache\-Fuer\-Alle\-Pre}}
+\index{mache\-Fuer\-Alle\-Pre@{mache\-Fuer\-Alle\-Pre}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{mache\-Fuer\-Alle\-Pre}]{\setlength{\rightskip}{0pt plus 5cm}void mache\-Fuer\-Alle\-Pre (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{this, }
+\item[{void }]{consumervoid $\ast$}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a926df3575d6b5d96b67b68f4bbb6dfb8}
+Function for applying a consumer to every single element preorder of the tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & tree$\ast$ -\/ tree to go through \\
+\hline
+{\em consumer} & void -\/ Function which is going to be applied \\
+\hline
+\end{DoxyParams}
+\hypertarget{mainBinTree_8c_a63105092ab2c09d637b4aca89e1ff0ce}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!new\-Empty\-Tree@{new\-Empty\-Tree}}
+\index{new\-Empty\-Tree@{new\-Empty\-Tree}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{new\-Empty\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree}$\ast$ new\-Empty\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf le}}]{kleiner\-Gleich}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_a63105092ab2c09d637b4aca89e1ff0ce}
+Creates a new empty tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em kleiner\-Gleich} & le Functionpointer to function which checks if an element is smaller oder bigger/equal to another\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new leaf tree without a leaf 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{mainBinTree_8c_ae63e49ec0f31d9cf356de5934173874f}{\index{main\-Bin\-Tree.\-c@{main\-Bin\-Tree.\-c}!new\-Leaf\-Tree@{new\-Leaf\-Tree}}
+\index{new\-Leaf\-Tree@{new\-Leaf\-Tree}!mainBinTree.c@{main\-Bin\-Tree.\-c}}
+\subsubsection[{new\-Leaf\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree}$\ast$ new\-Leaf\-Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf le}}]{kleiner\-Gleich, }
+\item[{void $\ast$}]{elem}
+\end{DoxyParamCaption}
+)}}\label{mainBinTree_8c_ae63e49ec0f31d9cf356de5934173874f}
+Creates a new tree with a root element
+
+
+\begin{DoxyParams}{Parameters}
+{\em kleiner\-Gleich} & le -\/ Functionpointer to function which checks if an element is smaller oder bigger/equal to another \\
+\hline
+{\em elem} & void$\ast$ -\/ element which is the new root\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new leaf tree with a leaf 
+\end{DoxyReturn}

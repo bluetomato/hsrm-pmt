@@ -1,0 +1,33 @@
+digraph "mkRhymeList"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="mkRhymeList",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="alCreate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ArrayList_8c.html#a917645b32d1c6b18e2509efa98325e20"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="alAdd",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ArrayList_8c.html#a4f230a77fd84672fdbc9bc883397c0cd"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="alGet",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ArrayList_8c.html#a04c91f255c9abc34428f978e8ef7d012"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="rhymeCheck",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$reimwoerterbuch_8c.html#a24585e07d3e59b05c7ad9f8892ff2569"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="newString",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$reimwoerterbuch_8c.html#addcd3cbd80554d14712a8931a51b67f6"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="length",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$BinTree_8h.html#a5b6e22532bd599ff63cab25ddcc031e9"];
+  Node5 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="strReverse",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$TestArrayList_8c.html#a4ed32c92e34d1280faa128997cd0e2e8"];
+  Node8 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="stringLength",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$reimwoerterbuch_8c.html#a3f3217ed6e0a2608b964a0bd107da210"];
+  Node5 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="stringCharAt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$reimwoerterbuch_8c.html#a20b5078d2d57d7c7ee23cfc977c25bcb"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="alCopy",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ArrayList_8c.html#a9abfd8f2caef3c9dcffecf32088d5964"];
+  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="alCreateP",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ArrayList_8c.html#aea5a67c196a6305595e09feda4bbb7a0"];
+  Node11 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="alDelete",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ArrayList_8c.html#a9d4ad7282bb6a7112f9e184b776c34bd"];
+}

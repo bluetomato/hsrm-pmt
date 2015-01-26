@@ -1,0 +1,11 @@
+digraph "klGlChar"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="klGlChar",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="stringCharAt",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$reimwoerterbuch_8c.html#a20b5078d2d57d7c7ee23cfc977c25bcb"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="stringLength",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$reimwoerterbuch_8c.html#a3f3217ed6e0a2608b964a0bd107da210"];
+}

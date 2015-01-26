@@ -1,0 +1,234 @@
+\hypertarget{Reimwoerterbuch_8h}{\section{Reimwoerterbuch.\-h File Reference}
+\label{Reimwoerterbuch_8h}\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}}
+}
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Bin\-Tree.\-h\char`\"{}}\\*
+Include dependency graph for Reimwoerterbuch.\-h\-:
+This graph shows which files directly or indirectly include this file\-:
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structString}{String}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structString}{String} $\ast$ \hyperlink{Reimwoerterbuch_8h_addcd3cbd80554d14712a8931a51b67f6}{new\-String} (const char $\ast$s)
+\item 
+int \hyperlink{Reimwoerterbuch_8h_a3f3217ed6e0a2608b964a0bd107da210}{string\-Length} (\hyperlink{structString}{String} $\ast$s)
+\item 
+int \hyperlink{Reimwoerterbuch_8h_a20b5078d2d57d7c7ee23cfc977c25bcb}{string\-Char\-At} (\hyperlink{structString}{String} $\ast$s, int index)
+\item 
+void \hyperlink{Reimwoerterbuch_8h_abf0bc55e0048401f663f45b6f6168237}{print\-String} (\hyperlink{structString}{String} $\ast$s)
+\item 
+\hyperlink{structString}{String} \hyperlink{Reimwoerterbuch_8h_ac13d9c58387c601d6e91e391324b2de1}{return\-String} (\hyperlink{structString}{String} $\ast$s)
+\item 
+void \hyperlink{Reimwoerterbuch_8h_ac9f2169ef6f8da0020b939a7370b264a}{print\-Liste\-String} (\hyperlink{structArrayList}{Array\-List} liste)
+\item 
+\hyperlink{structTR}{Tree} $\ast$ \hyperlink{Reimwoerterbuch_8h_ab4f5e8a3f1e2e3bba7cec63fb0843317}{get\-Set\-Of\-Words\-From\-Text\-File} (char $\ast$filename)
+\item 
+\hyperlink{structArrayList}{Array\-List} \hyperlink{Reimwoerterbuch_8h_abf2a4208ad7dc267143558e07395b2a2}{tree\-As\-List} (\hyperlink{structTR}{Tree} $\ast$tree)
+\item 
+\hyperlink{structArrayList}{Array\-List} \hyperlink{Reimwoerterbuch_8h_a2b1fbac304d71a7078ed845acc26bfa3}{mk\-Rhyme\-List} (\hyperlink{structArrayList}{Array\-List} words\-Rhyme\-Sorted)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a rhymedictionary
+
+\begin{DoxyAuthor}{Author}
+Stephanie Scholl 
+\end{DoxyAuthor}
+\begin{DoxyNote}{Note}
+Matrikelnummer\-: 979993 
+
+Hochschule Rhein\-Main
+
+Fach\-: Programmiermethoden-\/ und Techniken 
+
+2. Semester 
+
+Projektarbeit
+
+Professor\-: Sven Eric Panitz 
+
+Praktikumsleiter\-: Christian Lassmann 
+\end{DoxyNote}
+
+
+\subsection{Function Documentation}
+\hypertarget{Reimwoerterbuch_8h_ab4f5e8a3f1e2e3bba7cec63fb0843317}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!get\-Set\-Of\-Words\-From\-Text\-File@{get\-Set\-Of\-Words\-From\-Text\-File}}
+\index{get\-Set\-Of\-Words\-From\-Text\-File@{get\-Set\-Of\-Words\-From\-Text\-File}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{get\-Set\-Of\-Words\-From\-Text\-File}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree}$\ast$ get\-Set\-Of\-Words\-From\-Text\-File (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_ab4f5e8a3f1e2e3bba7cec63fb0843317}
+Reads a text file, converts every character to lowercase, and puts the words of this text file into a binary tree
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & char$\ast$ -\/ name of textfile\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+binary tree with the words of the textfile 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{Reimwoerterbuch_8h_a2b1fbac304d71a7078ed845acc26bfa3}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!mk\-Rhyme\-List@{mk\-Rhyme\-List}}
+\index{mk\-Rhyme\-List@{mk\-Rhyme\-List}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{mk\-Rhyme\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Array\-List} mk\-Rhyme\-List (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{words\-Rhyme\-Sorted}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_a2b1fbac304d71a7078ed845acc26bfa3}
+Creates a list of lists with rhymes
+
+
+\begin{DoxyParams}{Parameters}
+{\em words\-Rhyme\-Sorted} & \hyperlink{structArrayList}{Array\-List} -\/ list of sorted words\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{structArrayList}{Array\-List} with rhyming words 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{Reimwoerterbuch_8h_addcd3cbd80554d14712a8931a51b67f6}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!new\-String@{new\-String}}
+\index{new\-String@{new\-String}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{new\-String}]{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ new\-String (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_addcd3cbd80554d14712a8931a51b67f6}
+Initializes a new \hyperlink{structString}{String} and allocates space for data
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & const char$\ast$ -\/ char array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to new string struct with added data 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{Reimwoerterbuch_8h_ac9f2169ef6f8da0020b939a7370b264a}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!print\-Liste\-String@{print\-Liste\-String}}
+\index{print\-Liste\-String@{print\-Liste\-String}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{print\-Liste\-String}]{\setlength{\rightskip}{0pt plus 5cm}void print\-Liste\-String (
+\begin{DoxyParamCaption}
+\item[{{\bf Array\-List}}]{liste}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_ac9f2169ef6f8da0020b939a7370b264a}
+Function for printing an \hyperlink{structArrayList}{Array\-List}$<$Array\-List$<$\-String$>$$>$ to the console
+
+
+\begin{DoxyParams}{Parameters}
+{\em liste} & \hyperlink{structArrayList}{Array\-List} -\/ list that you want to be printet to the console \\
+\hline
+\end{DoxyParams}
+
+
+Here is the call graph for this function\-:
+
+
+\hypertarget{Reimwoerterbuch_8h_abf0bc55e0048401f663f45b6f6168237}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!print\-String@{print\-String}}
+\index{print\-String@{print\-String}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{print\-String}]{\setlength{\rightskip}{0pt plus 5cm}void print\-String (
+\begin{DoxyParamCaption}
+\item[{{\bf String} $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_abf0bc55e0048401f663f45b6f6168237}
+Prints a \hyperlink{structString}{String} to console
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & String$\ast$ -\/ \hyperlink{structString}{String} which is going to be printed \\
+\hline
+\end{DoxyParams}
+\hypertarget{Reimwoerterbuch_8h_ac13d9c58387c601d6e91e391324b2de1}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!return\-String@{return\-String}}
+\index{return\-String@{return\-String}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{return\-String}]{\setlength{\rightskip}{0pt plus 5cm}{\bf String} return\-String (
+\begin{DoxyParamCaption}
+\item[{{\bf String} $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_ac13d9c58387c601d6e91e391324b2de1}
+Function for returning a \hyperlink{structString}{String} Used at\-: \hyperlink{test3_8c}{test3.\-c} to write an X\-M\-L
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & String$\ast$ -\/ \hyperlink{structString}{String} that is going to be returned\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{structString}{String} input 
+\end{DoxyReturn}
+\hypertarget{Reimwoerterbuch_8h_a20b5078d2d57d7c7ee23cfc977c25bcb}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!string\-Char\-At@{string\-Char\-At}}
+\index{string\-Char\-At@{string\-Char\-At}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{string\-Char\-At}]{\setlength{\rightskip}{0pt plus 5cm}int string\-Char\-At (
+\begin{DoxyParamCaption}
+\item[{{\bf String} $\ast$}]{s, }
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_a20b5078d2d57d7c7ee23cfc977c25bcb}
+Function for returning the character at a particuar index
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & String$\ast$ -\/ \hyperlink{structString}{String} where you want to find the index \\
+\hline
+{\em index} & int -\/ number for index you are looking for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+data at index or, if there's none\-: -\/1 
+\end{DoxyReturn}
+\hypertarget{Reimwoerterbuch_8h_a3f3217ed6e0a2608b964a0bd107da210}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!string\-Length@{string\-Length}}
+\index{string\-Length@{string\-Length}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{string\-Length}]{\setlength{\rightskip}{0pt plus 5cm}int string\-Length (
+\begin{DoxyParamCaption}
+\item[{{\bf String} $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_a3f3217ed6e0a2608b964a0bd107da210}
+Function for returning the length of a string
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{structString}{String}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int with size of given string 
+\end{DoxyReturn}
+\hypertarget{Reimwoerterbuch_8h_abf2a4208ad7dc267143558e07395b2a2}{\index{Reimwoerterbuch.\-h@{Reimwoerterbuch.\-h}!tree\-As\-List@{tree\-As\-List}}
+\index{tree\-As\-List@{tree\-As\-List}!Reimwoerterbuch.h@{Reimwoerterbuch.\-h}}
+\subsubsection[{tree\-As\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Array\-List} tree\-As\-List (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree} $\ast$}]{tree}
+\end{DoxyParamCaption}
+)}}\label{Reimwoerterbuch_8h_abf2a4208ad7dc267143558e07395b2a2}
+Function that converts a binary tree to an \hyperlink{structArrayList}{Array\-List}
+
+
+\begin{DoxyParams}{Parameters}
+{\em tree} & Tree$\ast$ -\/ Tree that is going to be converted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list with all elements of tree 
+\end{DoxyReturn}
+
+
+Here is the call graph for this function\-:
+
+

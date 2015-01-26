@@ -1,0 +1,1658 @@
+-----------------Codeschnipsel Nummer 1:------------------------------------------------
+type Parser result token = [token] -> [(result,[token])]
+
+-----------------Codeschnipsel Nummer 2:------------------------------------------------
+getToken tok [] = []
+getToken tok (x:xs)
+  |tok==x = [(x,xs)]
+  |otherwise = []
+
+-----------------Codeschnipsel Nummer 3:------------------------------------------------
+alt p1 p2 toks 
+  |null res1 = p2 toks
+  |otherwise = res1
+ where
+  res1 = p1 toks
+
+-----------------Codeschnipsel Nummer 4:------------------------------------------------
+seqP p1 p2 toks = concat
+  [[((rs1,rs2),tks2) |(rs2,tks2)<-(p2 tks1) ] 
+  |(rs1,tks1)<-p1 toks]
+
+-----------------Codeschnipsel Nummer 5:------------------------------------------------
+mapP f p toks = [(f rs,tks)|(rs,tks)<-p toks]
+
+-----------------Codeschnipsel Nummer 6:------------------------------------------------
+parantheses = mapP (\((x1,x2),x3) -> x2)
+     (getToken '(' `seqP` a `seqP` getToken ')')
+
+a = getToken 'a' `alt` parantheses
+
+main = do 
+  print (parantheses "((((a))))")
+  print (parantheses "((((a)))")
+  print (parantheses "((((a))))bc")
+
+-----------------Codeschnipsel Nummer 7:------------------------------------------------
+<!DOCTYPE musiccollection SYSTEM "musiccollection.dtd" [
+  <!ELEMENT musiccollection (lp|cd|mc)*>  
+  <!ELEMENT lp (title,artist,recordingyear?,track+,note*)>  
+  <!ELEMENT cd (title,artist,recordingyear?,track+,note*)>  
+  <!ELEMENT mc (title,artist,recordingyear?,track+,note*)>  
+  <!ELEMENT track (title,timing?)>  
+  <!ELEMENT note (#PCDATA|author)*>
+
+  <!ELEMENT timing (#PCDATA)>  
+  <!ELEMENT title (#PCDATA)>  
+  <!ELEMENT artist (#PCDATA)>  
+  <!ELEMENT author (#PCDATA)>  
+  <!ELEMENT recordingyear (#PCDATA)>  
+]>
+
+-----------------Codeschnipsel Nummer 8:------------------------------------------------
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<musiccollection>
+  <lp>
+    <title>White Album</title>
+    <artist>The Beatles</artist>
+    <recordingyear>1968</recordingyear>
+    <track><title>Revolution 9</title></track>
+    <note><author>sep</author>my first lp</note>
+  </lp>
+  <cd>
+    <title>Open All Night</title>
+    <artist>Marc Almond</artist>
+    <track><title>Tragedy</title></track>
+    <note>
+     <author>sep</author>
+     Marc sung tainted love in the bandSoft Cell</note>
+  </cd>
+</musiccollection>
+
+-----------------Codeschnipsel Nummer 9:------------------------------------------------
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<musiccollection/>
+
+-----------------Codeschnipsel Nummer 10:------------------------------------------------
+package name.panitz.crempel.util;
+
+public class Tuple1<t1> {
+  public t1 e1;
+  public Tuple1(t1 a1){e1=a1;}
+  String parenthes(Object o){return "("+o+")";}
+  String simpleToString(){return e1.toString();}
+  public String toString(){return parenthes(simpleToString());}
+  public boolean equals(Object other){
+    if (! (other instanceof Tuple1)) return false;
+    return e1.equals(((Tuple1)other).e1);
+  }
+}
+
+-----------------Codeschnipsel Nummer 11:------------------------------------------------
+package name.panitz.crempel.util;
+
+public class Tuple2<t1,t2> extends Tuple1<t1>{
+  public t2 e2;
+  public Tuple2(t1 a1,t2 a2){super(a1);e2=a2;}
+  String simpleToString(){
+    return super.simpleToString()+","+e2.toString();}
+  public boolean equals(Object other){
+    if (! (other instanceof Tuple2)) return false;
+    return super.equals(other)&& e2.equals(((Tuple2)other).e2);
+  }
+}
+
+-----------------Codeschnipsel Nummer 12:------------------------------------------------
+package name.panitz.crempel.util;
+
+public class Tuple3<t1,t2,t3> extends Tuple2<t1,t2>{
+  public t3 e3;
+  public Tuple3(t1 a1,t2 a2,t3 a3){super(a1,a2);e3=a3;}
+  String simpleToString(){
+    return super.simpleToString()+","+e3.toString();}
+  public boolean equals(Object other){
+    if (! (other instanceof Tuple3)) return false;
+    return super.equals(other)&& e3.equals(((Tuple3)other).e3);
+  }
+}
+
+-----------------Codeschnipsel Nummer 13:------------------------------------------------
+package name.panitz.crempel.util;
+
+public interface Function1<arg,result>{result eval(arg a);}
+
+-----------------Codeschnipsel Nummer 14:------------------------------------------------
+package name.panitz.crempel.util;
+
+public interface Visitor<arg,result> 
+                      extends Function1<arg,result>{
+}
+
+-----------------Codeschnipsel Nummer 15:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import name.panitz.crempel.util.Tuple2;
+import java.util.List;
+import org.w3c.dom.Node;
+
+public class ParseResult<a> extends Tuple2<a,List<Node>>{
+  public ParseResult(a n,List<Node> xs){super(n,xs);}
+
+  public boolean failed(){return false;}
+}
+
+-----------------Codeschnipsel Nummer 16:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import org.w3c.dom.Node;
+
+public class Fail<a> extends ParseResult<a>{
+  public Fail(List<Node> xs){super(null,xs);}
+  public boolean failed(){return true;}
+}
+
+-----------------Codeschnipsel Nummer 17:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import java.util.ArrayList;
+import org.w3c.dom.Node;
+import name.panitz.crempel.util.Maybe;
+import name.panitz.crempel.util.Tuple2;
+import name.panitz.crempel.util.Function1;
+
+public interface  Parser<a>{
+  public ParseResult<a> parse(List<Node> xs);
+
+-----------------Codeschnipsel Nummer 18:------------------------------------------------
+  public <b> Parser<Tuple2<a,b>> seq(Parser<b> p2);
+  public <b extends a> Parser<a> choice(Parser<b> p2);
+  public Parser<List<a>> star();
+  public Parser<List<a>> plus();
+  public Parser<Maybe<a>> query();
+  public <b> Parser<b> map(Function1<a,b> f);
+}
+
+-----------------Codeschnipsel Nummer 19:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import name.panitz.crempel.util.Maybe;
+import name.panitz.crempel.util.Nothing;
+import name.panitz.crempel.util.Just;
+import org.w3c.dom.Node;
+
+public  class Optional<a> extends  AbstractParser<Maybe<a>> {
+  final Parser<a> p;
+  public Optional(Parser<a> _p){p=_p;}
+  public ParseResult<Maybe<a>> parse(List<Node> xs){
+    final ParseResult<a> res = p.parse(xs);
+    if (res.failed())
+      return new ParseResult<Maybe<a>>(new Nothing<a>(),xs); 
+    return new ParseResult<Maybe<a>>(new Just<a>(res.e1),res.e2);
+  }
+}
+
+-----------------Codeschnipsel Nummer 20:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import name.panitz.crempel.util.Tuple2;
+import org.w3c.dom.Node;
+
+public  class Seq<a,b> extends  AbstractParser<Tuple2<a,b>> {
+  final Parser<a> p1;
+  final Parser<b> p2;
+
+  public Seq(Parser<a> _p1,Parser<b> _p2){p1=_p1;p2=_p2;}
+
+  public ParseResult<Tuple2<a,b>> parse(List<Node> xs){ 
+    ParseResult<a> res1 = p1.parse(xs);
+    if (res1.failed())
+      return new Fail<Tuple2<a,b>>(xs);
+    ParseResult<b> res2 = p2.parse(res1.e2);
+    if (res2.failed())
+      return new Fail<Tuple2<a,b>>(xs);
+    return new ParseResult<Tuple2<a,b>>
+                 (new Tuple2<a,b>(res1.e1,res2.e1),res2.e2);
+  }
+}
+
+-----------------Codeschnipsel Nummer 21:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import java.util.ArrayList;
+import name.panitz.crempel.util.Tuple2;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+public class  Choice<c,a extends c,b extends c> 
+  extends  AbstractParser<c> {
+  final Parser<a> p1;
+  final Parser<b> p2;
+
+  public Choice(Parser<a> _p1,Parser<b> _p2){p1=_p1;p2=_p2;}
+
+  public ParseResult<c> parse(List<Node> xs){ 
+    final ParseResult<a> res1 =  p1.parse(xs);
+    if (res1.failed()){
+      final ParseResult<b> res2 = p2.parse(xs);
+      if (res2.failed()) return new Fail<c>(xs);
+      return new  ParseResult<c>(res2.e1,res2.e2);
+    }
+    return new  ParseResult<c>(res1.e1,res1.e2);
+  }
+}
+
+-----------------Codeschnipsel Nummer 22:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import java.util.ArrayList;
+import org.w3c.dom.Node;
+
+-----------------Codeschnipsel Nummer 23:------------------------------------------------
+public  class Repetition<a> extends  AbstractParser<List<a>> {
+  final Parser<a> p;
+  final boolean atLeastOne;
+  public Repetition(Parser<a> _p,boolean one){
+    p=_p;atLeastOne=one;
+  }
+
+-----------------Codeschnipsel Nummer 24:------------------------------------------------
+  public ParseResult<List<a>> parse(List<Node> xs){
+    final List<a> resultList = new ArrayList<a>();
+    int i = 0;
+
+    while (true){
+      final ParseResult<a> res = p.parse(xs);
+      xs=res.e2;
+
+      if (res.failed()) break;
+      resultList.add(res.e1);
+    }
+
+    if (resultList.isEmpty()&& atLeastOne) 
+      return new Fail<List<a>>(xs);
+    return new ParseResult<List<a>>(resultList,xs);
+  }
+}
+
+-----------------Codeschnipsel Nummer 25:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+
+public class Star<a> extends Repetition<a> {
+  public Star(Parser<a> p){super(p,false);}
+}
+
+-----------------Codeschnipsel Nummer 26:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+
+public class Plus<a> extends Repetition<a> {
+  public Plus(Parser<a> p){super(p,true);}
+}
+
+-----------------Codeschnipsel Nummer 27:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import org.w3c.dom.Node;
+import name.panitz.crempel.util.Function1;
+
+public class Map<a,b> extends AbstractParser<b> {
+  final Parser<a> p;
+  final Function1<a,b> f;
+
+  public Map(Function1<a,b> _f,Parser<a> _p){f=_f;p=_p;}
+
+  public ParseResult<b> parse(List<Node> xs){
+    final ParseResult<a> res = p.parse(xs);
+    if (res.failed()) return new Fail<b>(xs);
+    return new ParseResult<b>(f.eval(res.e1),res.e2); 
+  }
+}
+
+-----------------Codeschnipsel Nummer 28:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import name.panitz.crempel.util.Tuple2;
+import name.panitz.crempel.util.Maybe;
+import name.panitz.crempel.util.Function1;
+
+public abstract class AbstractParser<a> implements Parser<a>{
+  public <b> Parser<Tuple2<a,b>> seq(Parser<b> p2){
+    return new Seq<a,b>(this,p2);
+  }
+
+  public <b extends a> Parser<a> choice(Parser<b> p2){
+    return new Choice<a,a,b>(this,p2);
+  }
+
+  public Parser<List<a>> star(){return new Star<a>(this);}
+  public Parser<List<a>> plus(){return new Plus<a>(this);}
+  public Parser<Maybe<a>> query(){return new Optional<a>(this);}
+  public <b> Parser<b> map(Function1<a,b> f){
+    return new Map<a,b>(f,this);
+  }
+}
+
+-----------------Codeschnipsel Nummer 29:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import org.w3c.dom.Node;
+
+public class PCData extends AbstractParser<String> {
+
+  public ParseResult<String> parse(List<Node> xs){
+    if (xs.isEmpty()) return new Fail<String>(xs);
+    final Node x = xs.get(0);
+    if (x.getNodeType()==Node.TEXT_NODE)
+      return new ParseResult<String>
+                  (x.getNodeValue(),xs.subList(1,xs.size()));
+System.out.println("expected pcdata but got: "+x);
+    return new Fail<String>(xs);
+  }
+}
+
+-----------------Codeschnipsel Nummer 30:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import org.w3c.dom.Node;
+
+public class Return<a> extends AbstractParser<a> {
+  final a returnValue;
+  public Return(a r){returnValue=r;}
+  public ParseResult<a> parse(List<Node> xs){
+    return new ParseResult<a>(returnValue,xs);
+  }
+}
+
+-----------------Codeschnipsel Nummer 31:------------------------------------------------
+package name.panitz.crempel.util;
+
+public interface Closure<result>{
+  public result eval();
+}
+
+-----------------Codeschnipsel Nummer 32:------------------------------------------------
+package name.panitz.crempel.util.xml.parslib;
+
+import java.util.List;
+import java.util.ArrayList;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import name.panitz.crempel.util.Closure;
+
+
+public class Element<a> extends AbstractParser<a> {
+  Parser<a> p=null;
+  private final Closure<Parser<a>> pc;
+  final String elementName;
+
+  public Element(String n,Parser<a> _p){elementName=n;p=_p;pc=null;}
+  public Element(String n,Closure<Parser<a>> _p){elementName=n;pc=_p;}
+
+  public Parser<a> getP(){if (p==null) p=pc.eval(); return p;}
+
+-----------------Codeschnipsel Nummer 33:------------------------------------------------
+  public ParseResult<a> parse(List<Node> xs){
+    if (xs.isEmpty()) {return new Fail<a>(xs);}
+    Node x = xs.get(0);
+    while (   x.getNodeType()==Node.TEXT_NODE
+           && x.getNodeValue().trim().length()==0
+          ){
+      xs=xs.subList(1,xs.size());
+      if (xs.isEmpty()) return new Fail<a>(xs);  
+
+      x = xs.get(0);
+    }
+
+-----------------Codeschnipsel Nummer 34:------------------------------------------------
+    final String name = x.getNodeName();
+System.out.println(name+" <-> "+elementName);
+    if (!name.equals(elementName)) 
+      return new Fail<a>(xs);
+
+-----------------Codeschnipsel Nummer 35:------------------------------------------------
+    final List<Node> ys = nodelistToList(x.getChildNodes());
+    ParseResult<a> res = getP().parse(ys);
+
+    if( res.failed()) return new Fail<a>(xs); 
+
+-----------------Codeschnipsel Nummer 36:------------------------------------------------
+    for (Node y :res.e2){
+      if (y.getNodeType()!=Node.TEXT_NODE 
+             || y.getNodeValue().trim().length()!=0)
+         return new Fail<a>(xs);
+    }
+
+-----------------Codeschnipsel Nummer 37:------------------------------------------------
+    return new ParseResult<a>(res.e1,xs.subList(1,xs.size()));    
+  }
+
+-----------------Codeschnipsel Nummer 38:------------------------------------------------
+  static public List<Node> nodelistToList(NodeList xs){
+    List<Node> result = new ArrayList<Node>();
+    for (int i=0;i<xs.getLength();i=i+1){
+      result.add(xs.item(i));
+    }
+    return result;
+  }
+}
+
+-----------------Codeschnipsel Nummer 39:------------------------------------------------
+package name.panitz.crempel.test;
+
+import java.util.List;
+import org.w3c.dom.Node;
+import name.panitz.crempel.util.*;
+import name.panitz.crempel.util.xml.parslib.*;
+
+public class MusiccollectionParser extends AbstractParser<String>{
+
+-----------------Codeschnipsel Nummer 40:------------------------------------------------
+  final private Function1<Tuple2<String,String>,String> concat
+    = new Function1<Tuple2<String,String>,String>(){
+         public String eval(Tuple2<String,String> p){
+           return p.e1+p.e2;
+         }
+      };
+
+-----------------Codeschnipsel Nummer 41:------------------------------------------------
+  final private Function1<Maybe<String>,String> getString
+    = new Function1<Maybe<String>,String>(){
+         public String eval(Maybe<String> p){
+           if (p instanceof Nothing) return "";  
+           return ((Just<String>)p).getJust();
+         }
+      };
+
+-----------------Codeschnipsel Nummer 42:------------------------------------------------
+  final private Function1<List<String>,String> concatList
+    = new Function1<List<String>,String>(){
+         public String eval(List<String> xs){
+           final StringBuffer result = new StringBuffer();
+           for (String x:xs) result.append(x);
+           return result.toString();
+         }
+      };
+
+-----------------Codeschnipsel Nummer 43:------------------------------------------------
+  final private Parser<String> recordingyear
+    = new Element<String>("recordingyear",new PCData());
+  final private Parser<String> artist
+    = new Element<String>("artist",new PCData());
+  final private Parser<String> title
+    = new Element<String>("title",new PCData());
+  final private Parser<String> timing
+    = new Element<String>("timing",new PCData());
+  final private Parser<String> author
+    = new Element<String>("author",new PCData());
+
+-----------------Codeschnipsel Nummer 44:------------------------------------------------
+  final private Parser<String> note
+    = new Element<String>
+       ("note",author.seq(new PCData()).map(concat));
+
+  final private Parser<String> track
+    = new Element<String>("track"
+        ,title.seq(timing.query().map(getString)).map(concat));
+                    
+  final private Parser<String> content
+    =    title
+        .seq(artist).map(concat)
+        .seq(recordingyear.query().map(getString)).map(concat)
+        .seq(track.plus().map(concatList)).map(concat)
+        .seq(note.star().map(concatList)).map(concat);
+
+  final private Parser<String> lp
+    = new Element<String>("lp",content);
+  final private Parser<String> cd
+    = new Element<String>("cd",content);
+  final private Parser<String> mc
+    = new Element<String>("mc",content);
+
+  final private Parser<String> musiccollection
+   = new Element<String>
+      ("musiccollection",lp.choice(cd).choice(mc)
+                           .star().map(concatList));
+
+  public ParseResult<String> parse(List<Node> xs){
+    return musiccollection.parse(xs);
+  }
+}
+
+-----------------Codeschnipsel Nummer 45:------------------------------------------------
+package name.panitz.crempel.test;
+
+import name.panitz.crempel.util.*;
+import name.panitz.crempel.util.xml.parslib.*;
+
+import org.w3c.dom.*;
+import java.util.*;
+import java.io.*;
+import javax.xml.parsers.*;
+
+public class MainParser{
+  public static void main(String [] args){
+    System.out.println(pFile(args[0],args[1]));
+  }
+
+  public static Object pFile(String parserClass,String fileName){
+    try{
+      DocumentBuilderFactory factory
+        = DocumentBuilderFactory.newInstance();
+
+      factory.setIgnoringElementContentWhitespace(true);
+      factory.setCoalescing(true); 
+      factory.setIgnoringComments(true);
+
+      Document doc
+	=factory.newDocumentBuilder()
+	.parse(new File(fileName)) ;
+      doc.normalize();
+      List<Node> xs = new ArrayList<Node>();
+      xs.add(doc.getChildNodes().item(0));
+ 
+      Parser<Object> p
+       = (Parser<Object>)Class.forName(parserClass).newInstance();
+      
+      Tuple2 res = p.parse(xs);
+
+      return res.e1;
+    }catch (Exception e){e.printStackTrace();return null;}
+  }
+}
+
+-----------------Codeschnipsel Nummer 46:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd.tree;
+import name.panitz.adt.*;
+
+public @Data class DTDDef {
+  @Constr public void DTDPCData(){}
+  @Constr public void DTDTagName(String tagName){}
+  @Constr public void DTDAny(){}
+  @Constr public void DTDEmpty(){}{}
+  @Constr public void DTDPlus(DTDDef dtd){}
+  @Constr public void DTDStar(DTDDef dtd){}
+  @Constr public void DTDQuery(DTDDef dtd){}
+  @Constr public void DTDSeq(java.util.List<DTDDef> seqParts){}
+  @Constr public void DTDChoice(java.util.List<DTDDef> choiceParts){}
+}
+
+-----------------Codeschnipsel Nummer 47:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import java.util.List;
+
+public class DTDShow extends DTDDefVisitor<String>{
+  public String show(DTDDef def){return ((DTDDefAdt)def).welcome(this);}
+
+  public String visit(DTDPCData _){return "#PCDATA";};
+  public String visit(DTDTagName x){return x.tagName;}
+  public String visit(DTDEmpty x){return "Empty";}
+  public String visit(DTDAny x){return "Any";}
+  public String visit(DTDPlus x){return show(x.dtd)+"+";};
+  public String visit(DTDStar x){return show(x.dtd)+"*";};
+  public String visit(DTDQuery x){return show(x.dtd)+"?";};
+  public String visit(DTDSeq s){
+    return aux(this,",",s.seqParts);}
+  public String visit(DTDChoice c){
+    return aux(this,"|",c.choiceParts);}
+
+  private String aux
+              (DTDShow visitor,String sep,List<DTDDef> parts){
+    StringBuffer result=new StringBuffer("(");
+    boolean first = true; for (DTDDef x:parts){
+      if (first) first=false; else result.append(sep);
+      result.append(show(x));
+    }
+    result.append(")");
+    return result.toString();
+  }
+}
+
+-----------------Codeschnipsel Nummer 48:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import name.panitz.crempel.util.*;
+import java.util.List;
+import java.util.ArrayList;
+
+public class ShowType extends DTDDefVisitor<String>{
+  public String visit(DTDPCData x){return "String";}
+  public String visit(DTDTagName x){return x.tagName;}
+  public String visit(DTDEmpty x){return "Object";}
+  public String visit(DTDAny x){return "Object";}
+  public String visit(DTDPlus x){return "List<"+showType(x.dtd)+">";}
+  public String visit(DTDStar x){return "List<"+showType(x.dtd)+">";}
+  public String visit(DTDQuery x){return "Maybe<"+showType(x.dtd)+">";}
+  public String visit(DTDSeq x){
+    return listAsType((List<DTDDef>) x.seqParts);}
+
+  public String visit(DTDChoice x){
+    List<DTDDef> parts = x.choiceParts;
+    if (parts.size()==1) return showType(parts.get(0));
+    StringBuffer result=new StringBuffer("Choice");
+    for (DTDDef y:((List<DTDDef>) parts))
+      result.append("_"+typeToIdent(showType(y)));
+    return result.toString();
+  }
+
+  private  String listAsType(List<DTDDef> xs){
+    int size=xs.size();
+
+    if (size==1) return showType(xs.get(0));
+    StringBuffer result = new StringBuffer();
+    for (Integer i:new FromTo(2,size)){
+      result.append("Tuple2<");
+    }
+    boolean first=true;
+    for (DTDDef dtd:xs){
+      if (!first) result.append(",");
+      result.append(showType(dtd));
+      if (!first) result.append(">");
+      first=false; 
+    }
+    return result.toString();       
+  }
+
+  public  String showType(DTDDef def){
+    return ((DTDDefAdt)def).welcome(this);}
+
+  public  static String sShowType(DTDDef def){
+    return new ShowType().showType(def);}
+
+  static public String typeToIdent(String s ){
+    return s.replace('<','_').replace('>','_').replace('.','_');
+  }
+}
+
+-----------------Codeschnipsel Nummer 49:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+
+//import name.panitz.crempel.util.adt.parser.ADT;
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import name.panitz.crempel.util.*;
+//import name.panitz.crempel.util.adt.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.Writer;
+import java.io.StringReader;
+import java.io.FileWriter;
+import java.io.StringWriter;
+import java.io.IOException;
+
+public class GenerateADT extends DTDDefVisitor<String>{
+  final String elementName;
+  public GenerateADT(String e){elementName=e;}
+
+  public String visit(DTDPCData x){
+   return "  public @Constr void Con(String pcdata){}";}
+  public String visit(DTDTagName x){
+    final String typeName = ShowType.sShowType(x);
+    return "  public @Constr void Con("+typeName+" the"+typeName+"){}";}
+  public String visit(DTDEmpty x){return "";}
+  public String visit(DTDAny x){return "";}
+  public String visit(DTDPlus x){
+    return "  public @Constr void Con(List<"+ShowType.sShowType(x.dtd)+"> xs){}";}
+  public String visit(DTDStar x){
+    return "  public @Constr void Con(List<"+ShowType.sShowType(x.dtd)+"> xs){}";}
+  public String visit(DTDQuery x){
+    return "  public @Constr void Con(Maybe<"+ShowType.sShowType(x.dtd)+"> xs){}";}
+  public String visit(DTDSeq x){
+    StringBuffer result = new StringBuffer("public @Constr void Con(");
+    boolean first = true;
+    for (DTDDef dtd :x.seqParts){
+      if (!first) result.append(","); 
+      final String typeName = ShowType.sShowType(dtd);
+      result.append(typeName+" the"+ShowType.typeToIdent(typeName));
+
+      first=false;
+    }
+    result.append("){}");
+    return result.toString();
+  }
+  public String visit(DTDChoice x){
+    StringBuffer result = new StringBuffer();
+    for (DTDDef dtd :x.choiceParts){
+      String typeName = ShowType.sShowType(dtd);
+      final String varName = ShowType.typeToIdent(typeName);
+
+      result.append("\n  public @Constr void C"+elementName+varName
+                             +"("+typeName+" the"+varName+"){}");
+    }
+    return result.toString();
+  }
+
+  public static String generateADT(String element,DTDDef def){
+   return ((DTDDefAdt)def).welcome(new GenerateADT(element));}
+
+  public static void  generateADT
+     (String paket,String path,List<Tuple3<Boolean,String,DTDDef>> xs){
+    try {
+      for (Tuple3<Boolean,String,DTDDef>x:xs){
+        Writer out = new FileWriter(path+"/"+x.e2+".java");
+        out.write("package "+paket+";\n");
+        out.write("import java.util.List;\n");
+        out.write("import name.panitz.crempel.util.Maybe;\n");
+        out.write("import name.panitz.adt.*;\n");
+        out.write("public @Data class "+x.e2+"{\n");
+        out.write(generateADT(x.e2,x.e3));
+        out.write("}");
+        out.close();
+       }
+      }catch (Exception e){e.printStackTrace();}
+  }
+}
+
+-----------------Codeschnipsel Nummer 50:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import name.panitz.crempel.util.*;
+//import name.panitz.crempel.util.adt.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.Writer;
+import java.io.StringWriter;
+import java.io.IOException;
+
+public class ParserCode extends DTDDefVisitor<String>{
+  final String elementName;
+  public ParserCode(String e){elementName=e;}
+
+  public String visit(DTDPCData x){return "new PCData()";}
+  public String visit(DTDTagName x){return "getV"+x.tagName+"()";}
+  public String visit(DTDEmpty x){return "new Return(null)";}
+  public String visit(DTDAny x){return null;}
+  public String visit(DTDPlus x){return parserCode(x.dtd)+".plus()";}
+  public String visit(DTDStar x){return parserCode(x.dtd)+".star()";}
+  public String visit(DTDQuery x){return parserCode(x.dtd)+".query()";}
+  public String visit(DTDSeq x){
+    StringBuffer result = new StringBuffer();
+    boolean first = true;
+    for (DTDDef dtd:(List<DTDDef>) x.seqParts){
+      if (!first){result.append(".seq(");}
+      result.append(parserCode(dtd));
+      if (!first){result.append(")");}
+      first=false;
+    }
+    return result.toString();
+  }
+
+  public String visit(DTDChoice x){
+    final List<DTDDef> xs =  x.choiceParts;
+    if (xs.size()==1) {
+      final DTDDef ch = xs.get(0);
+      final String s  = parserCode(ch);
+      return s;
+    }
+    StringBuffer result = new StringBuffer();
+    boolean first = true;
+    for (DTDDef dtd:xs){
+      final String argType = ShowType.sShowType(dtd);
+      final String resType = elementName;
+      if (!first){result.append(".choice(");}
+      result.append(parserCode(dtd));
+      result.append(".<"+resType+">map(new Function1<");
+      result.append(argType);
+      result.append(",");
+      result.append(resType);
+      result.append(">(){");
+      result.append("\n    public "+resType+" eval("+argType+" x){");
+   
+      String typeName = ShowType.sShowType(dtd);
+      final String varName = ShowType.typeToIdent(typeName);
+      result.append("\n      return ("+resType+")new C"
+             +elementName+varName
+             +"(x);");
+      result.append("\n    }");
+      result.append("\n  })");
+      if (!first){result.append(")");}
+      first=false;
+    }
+    return result.toString();
+  }
+
+  public String parserCode(DTDDef def){
+    return ((DTDDefAdt)def).welcome(this);}
+
+  public static String parserCode(DTDDef def,String n){
+   return new ParserCode(n).parserCode(def);}
+}
+
+-----------------Codeschnipsel Nummer 51:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import name.panitz.crempel.util.*;
+//import name.panitz.crempel.util.adt.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.Writer;
+import java.io.StringWriter;
+import java.io.IOException;
+
+public class WriteParser extends DTDDefVisitor<String>{
+  final String elementName;
+  final boolean isGenerated  ;
+  String contentType = null;
+  String typeDef = null;
+  String fieldName = null;
+  String getterName = null;
+
+  public WriteParser(String e,boolean g){elementName=e;isGenerated=g;}
+
+  private void start(DTDDef def,StringBuffer result){
+    contentType = ShowType.sShowType(def);
+    typeDef = !isGenerated?elementName:contentType;
+    fieldName = "v"+elementName;  
+    getterName = "getV"+elementName+"()";  
+
+    result.append("\n\n  private Parser<"+typeDef+"> "+fieldName+" = null;"); 
+    result.append("\n  public Parser<"+typeDef+"> "+getterName+"{"); 
+    result.append("\n    if ("+fieldName+"==null){"); 
+    result.append("\n      "+fieldName+" = ");
+    if (!isGenerated) {
+      result.append("new Element<"+typeDef+">(\""+typeDef+"\"");
+      result.append("\n     ,");
+      result.append("new Closure<Parser<"+typeDef+">>(){public Parser<"+typeDef+"> eval(){return ");      
+    }
+
+  }
+
+  private String f(DTDDef def){
+    StringBuffer result=new StringBuffer();
+    start(def,result);
+    result.append(ParserCode.parserCode(def,elementName));
+    if (!isGenerated){
+      result.append("\n     .<"+typeDef+">map(new Function1");
+      result.append("<"+contentType+","+typeDef+">(){");
+      result.append("\n       public "+typeDef+" eval("+contentType+" x){");
+      result.append("\n         return new "+typeDef+"(x);");
+      result.append("\n       }");
+      result.append("\n     })");
+    } 
+    end(def,result);
+    return result.toString();
+  }
+
+  private void end(DTDDef def,StringBuffer result){
+    if (!isGenerated){
+      result.append("\n;}}//end of closure\n"); 
+      result.append(")");     
+
+    }
+    result.append(";"); 
+    result.append("\n    }"); 
+    result.append("\n    return "+fieldName+";"); 
+    result.append("\n  }");
+  }
+
+  private String startend(DTDDef def){
+    StringBuffer result=new StringBuffer();
+    start(def,result);
+    result.append(ParserCode.parserCode(def,elementName));
+    end(def,result);
+    return result.toString();
+  }
+
+  public String visit(DTDPCData x){return f(x);}
+  public String visit(DTDTagName x){return f(x);}
+  public String visit(DTDEmpty x){return f(x);}
+  public String visit(DTDAny x){return null;}
+  public String visit(DTDPlus x){return f(x);}
+  public String visit(DTDStar x){return f(x);}
+  public String visit(DTDQuery x){return f(x);}
+  public String visit(DTDChoice x){return startend(x);}
+  public String visit(DTDSeq x){
+    StringBuffer result = new StringBuffer();
+    start(x,result);
+    result.append(ParserCode.parserCode(x,elementName));
+    result.append(".map(new Function1<"
+                 +ShowType.sShowType(x)+","+elementName+">(){");
+    result.append("\n    public "+elementName);
+    result.append(" eval("+ShowType.sShowType(x) +" p){");
+    result.append("\n      return new "+elementName);
+    unrollPairs(x.seqParts.size(),"p",result);
+    result.append(";");
+    result.append("\n    }");
+    result.append("\n  }");
+    result.append(")");
+    end(x,result);
+    return result.toString();
+  }
+
+  private void unrollPairs(int i,String var,StringBuffer r){
+    String c = var;
+    String result="";
+    for (Integer j :new FromTo(2,i)){
+       result=","+c+".e2"+result;
+       c= c+".e1";
+    }
+    result=c+result;
+    r.append("(");
+    r.append(result);
+    r.append(")");
+  }
+
+  public static String writeParser
+                      (DTDDef def,String n,boolean isGenerated){
+    return new WriteParser(n,isGenerated).writeParser(def);}
+
+  public  String writeParser(DTDDef def){
+    return ((DTDDefAdt)def).welcome(this);}
+}
+
+-----------------Codeschnipsel Nummer 52:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+import name.panitz.crempel.util.xml.dtd.tree.DTDDef;
+import name.panitz.crempel.util.Tuple3;
+import name.panitz.crempel.util.Tuple2;
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class FlattenResult
+   extends Tuple2<DTDDef,List<Tuple3<Boolean,String,DTDDef>>>{
+  public FlattenResult(DTDDef dtd,List<Tuple3<Boolean,String,DTDDef>> es){
+    super(dtd,es);
+  }
+
+  public FlattenResult(DTDDef dtd){
+    super(dtd,new ArrayList<Tuple3<Boolean,String,DTDDef>>() );
+  }
+}
+
+-----------------Codeschnipsel Nummer 53:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+import name.panitz.crempel.util.xml.dtd.IsAtomic.*;
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import name.panitz.crempel.util.Tuple3;
+import name.panitz.crempel.util.Tuple2;
+import name.panitz.crempel.util.Function1;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.TreeSet;
+import java.util.Comparator;
+
+public class DTDDefFlatten extends DTDDefVisitor<FlattenResult>{
+  final String elementName;
+  final boolean isGenerated;
+  private int counter = 0;
+  private String getNextName(){
+    counter=counter+1;
+    return elementName+"_"+counter;
+  }
+
+  public DTDDefFlatten(boolean g,String n){elementName=n;isGenerated=g;}
+
+  public FlattenResult visit(DTDPCData x){
+    return single(x);}
+  public FlattenResult visit(DTDTagName x){
+    return single(x);}
+  public FlattenResult visit(DTDEmpty x){
+    return single(x);}
+  public FlattenResult visit(DTDAny x){
+    return single(x);}
+  public FlattenResult visit(DTDPlus x){
+    if (IsAtomic.isAtomic(x.dtd)) return single(x);
+    return flattenModified(elementName,x.dtd
+          ,new Function1<DTDDef,DTDDef>(){
+             public DTDDef eval(DTDDef dtd){return new DTDPlus(dtd);}
+           });
+  }
+  public FlattenResult visit(DTDStar x){
+    if (IsAtomic.isAtomic(x.dtd)) return single(x);
+    return 
+     flattenModified(elementName,x.dtd
+          ,new Function1<DTDDef,DTDDef>(){
+             public DTDDef eval(DTDDef dtd){return new DTDStar(dtd);}
+           });
+  }
+  public FlattenResult visit(DTDQuery x){
+    if (IsAtomic.isAtomic(x.dtd)) return single(x);
+    return flattenModified(elementName,x.dtd
+          ,new Function1<DTDDef,DTDDef>(){
+             public DTDDef eval(DTDDef dtd){return new DTDQuery(dtd);}
+           });
+  }
+  public FlattenResult visit(DTDSeq x){
+    return flattenPartList(x.seqParts
+          ,new Function1<List<DTDDef>,DTDDef>(){
+             public DTDDef eval(List<DTDDef> dtds){
+               return new DTDSeq(dtds);}
+           });
+  }
+  public FlattenResult visit(DTDChoice x){
+    return flattenPartList(x.choiceParts
+          ,new Function1<List<DTDDef>,DTDDef>(){
+             public DTDDef eval(List<DTDDef> dtds){
+//System.out.println("the new choice"+dtds);
+               return new DTDChoice(dtds);}
+           });
+   }
+
+  private FlattenResult single(DTDDef x){return new FlattenResult(x);}
+
+  private FlattenResult flattenModified
+          (final String orgElem,DTDDef content
+          ,Function1<DTDDef,DTDDef> constr){
+    List<Tuple3<Boolean,String,DTDDef>> result 
+     = new ArrayList<Tuple3<Boolean,String,DTDDef>>();
+    if (needsNewElement(content)){
+//    System.out.println("owo needs new element: "+content );
+      final String newElemName
+        = ShowType.typeToIdent(ShowType.sShowType(content));
+
+      result.add(new Tuple3<Boolean,String,DTDDef>
+         (true,newElemName,content));
+      return new FlattenResult
+                (constr.eval(new DTDTagName(newElemName)),result);
+    } 
+//    System.out.println("does not need new element");
+    FlattenResult innerRes  = flatten(content);
+//    System.out.println(innerRes);
+    return new FlattenResult(constr.eval(innerRes.e1),innerRes.e2);
+  }
+
+  private FlattenResult flattenPartList
+      (List<DTDDef> parts,Function1<List<DTDDef>,DTDDef> constr){
+    final List<Tuple3<Boolean,String,DTDDef>> result 
+      = new ArrayList<Tuple3<Boolean,String,DTDDef>>();
+    if (parts.size()==1) {return single(parts.get(0));}
+
+    List<DTDDef> newParts = new ArrayList<DTDDef>();    
+    for (DTDDef part:parts){
+      if (IsAtomic.isAtomic(part)) {//System.out.println("atomic part:"+part);
+            newParts.add(part);}
+      else if (needsNewElement(part)){
+        final String newElemName
+          = ShowType.typeToIdent(ShowType.sShowType(part));
+        result.add(new Tuple3<Boolean,String,DTDDef>
+             (true,newElemName,part));
+        newParts.add(new DTDTagName(newElemName));
+      }else{
+        FlattenResult innerRes  = flatten(part);
+        newParts.add(innerRes.e1);
+        result.addAll(innerRes.e2);
+      }
+    } 
+    return new FlattenResult(constr.eval(newParts),result);
+  }
+
+  static private boolean needsNewElement(DTDDef d){
+    return 
+     (d instanceof DTDSeq && ((DTDSeq)d).seqParts.size()>1)
+            ||
+     (d instanceof DTDChoice &&((DTDChoice)d).choiceParts.size()>1);
+  }
+
+  static public List<Tuple3<Boolean,String,DTDDef>> 
+       flattenDefList(List<Tuple3<Boolean,String,DTDDef>> defs){
+    boolean changed = true;
+    List<Tuple3<Boolean,String,DTDDef>> result = defs;
+    while (changed){
+      Tuple2<Boolean,List<Tuple3<Boolean,String,DTDDef>>> once
+        = flattenDefListOnce(result);
+      changed=once.e1;
+      result=once.e2;
+    } 
+
+    TreeSet<Tuple3<Boolean,String,DTDDef>> withoutDups
+      = new TreeSet<Tuple3<Boolean,String,DTDDef>>(
+         new Comparator<Tuple3<Boolean,String,DTDDef>>(){
+           public int compare(Tuple3<Boolean,String,DTDDef> o1
+                             ,Tuple3<Boolean,String,DTDDef> o2){
+              return o1.e2.compareTo(o2.e2);
+           }
+         });
+    withoutDups.addAll(result); 
+
+    result = new ArrayList<Tuple3<Boolean,String,DTDDef>> ();
+    result.addAll(withoutDups);
+    return result;
+  }
+
+  private static Tuple2<Boolean,List<Tuple3<Boolean,String,DTDDef>>> 
+       flattenDefListOnce(List<Tuple3<Boolean,String,DTDDef>> defs){
+
+    final List<Tuple3<Boolean,String,DTDDef>> result
+     = new ArrayList<Tuple3<Boolean,String,DTDDef>>();
+
+    boolean changed = false;
+
+    for (Tuple3<Boolean,String,DTDDef> def:defs){
+      final FlattenResult singleResult
+        = new DTDDefFlatten(def.e1,def.e2).flatten(def.e3);
+      changed=changed||singleResult.e2.size()>0;
+      result.addAll(singleResult.e2);
+      result.add(
+       new Tuple3<Boolean,String,DTDDef>(
+         singleResult.e2.isEmpty()&&def.e1,def.e2,singleResult.e1));
+    }
+    return new Tuple2<Boolean,List<Tuple3<Boolean,String,DTDDef>>>
+                  (changed,result); 
+  }
+
+  public static FlattenResult flatten(DTDDef def,String n){
+   return new DTDDefFlatten(false,n).flatten(def);}
+
+  public  FlattenResult flatten(DTDDef def){
+   return ((DTDDefAdt)def).welcome(this);}
+}
+
+
+
+-----------------Codeschnipsel Nummer 54:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+
+import name.panitz.crempel.util.xml.dtd.tree.*;
+
+public class IsAtomic extends DTDDefVisitor<Boolean>{
+  public Boolean visit(DTDPCData x){return true;}
+  public Boolean visit(DTDTagName x){return true;}
+  public Boolean visit(DTDEmpty x){return true;}
+  public Boolean visit(DTDAny x){return true;}
+  public Boolean visit(DTDPlus x){return isAtomic(x.dtd);}
+  public Boolean visit(DTDStar x){return isAtomic(x.dtd);}
+  public Boolean visit(DTDQuery x){return isAtomic(x.dtd);}
+  public Boolean visit(DTDSeq x){return false;}
+  public Boolean visit(DTDChoice x){return false;}
+
+  public static Boolean isAtomic(DTDDef def ){
+   return ((DTDDefAdt)def).welcome(new IsAtomic());}
+}
+
+-----------------Codeschnipsel Nummer 55:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd;
+
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.*;
+import name.panitz.crempel.util.*;
+
+public class GenerateClassesForDTD{
+  public static void generateAll
+     (String paket,String path,String n,List<Tuple2<String,DTDDef>>dtds){
+    List<Tuple3<Boolean,String,DTDDef>> xs
+      = new ArrayList<Tuple3<Boolean,String,DTDDef>>();
+    for (Tuple2<String,DTDDef> t:dtds)
+      xs.add(new Tuple3<Boolean,String,DTDDef>(false,t.e1,t.e2));
+
+    xs = DTDDefFlatten.flattenDefList(xs);
+
+    System.out.println("vereinfacht und flachgemacht");
+    for (Tuple3<Boolean,String,DTDDef> t:xs){
+      System.out.println(t.e2);
+      System.out.println(t.e3);
+      System.out.println("");
+    }
+    
+    final String parserType = dtds.get(0).e1;
+    try{
+      Writer out = new FileWriter(path+"/"+n+"Parser"+".java");
+      out.write("package "+paket+";\n");
+
+      out.write("import name.panitz.crempel.util.xml.parslib.*;\n");
+      out.write("import name.panitz.crempel.util.*;\n");
+      out.write("import java.util.*;\n");
+      out.write("import org.w3c.dom.Node;\n\n");
+
+      out.write("public class "+n+"Parser ");
+      out.write("extends AbstractParser<"+parserType+">{\n");
+
+      out.write("public ParseResult<"+parserType+"> ");
+      out.write("parse(List<Node> xs){");
+      out.write("  return getV"+parserType+"().parse(xs);}\n\n");
+
+      for (Tuple3<Boolean,String,DTDDef> x :xs)
+        out.write(WriteParser.writeParser(x.e3,x.e2,x.e1));
+
+      out.write("}");  
+      out.close();  
+    }catch (IOException e){e.printStackTrace();}
+    GenerateADT.generateADT(paket,path,xs);
+  }             
+}
+
+-----------------Codeschnipsel Nummer 56:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd.parser;
+
+import java.io.*;
+import java.util.*;
+import name.panitz.crempel.util.*;
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import name.panitz.crempel.util.xml.dtd.*;
+
+public class MainDTDParse {
+  public static void main(String [] args){
+    try{
+      final String dtdFileName = args[0];
+      final String packageName = args[1].replace('/','.');
+
+      File f = new File(dtdFileName);  
+      final String path
+          = f.getParentFile()==null?".":f.getParentFile().getPath();
+
+      final DTD parser = new DTD(new FileReader(f));
+
+      final Tuple3<List<Tuple2<String,DTDDef>>,List<String>,String> dtd
+        = parser.dtd();
+
+      for (Tuple2<String,DTDDef> t:dtd.e1){
+        System.out.println(t.e1);
+        System.out.println(t.e2);
+        System.out.println("");
+      }
+ 
+      GenerateClassesForDTD
+          .generateAll(packageName,path,dtd.e3,dtd.e1);
+   }catch (Exception _){_.printStackTrace();System.out.println(_);} 
+  }
+}
+
+-----------------Codeschnipsel Nummer 57:------------------------------------------------
+options {STATIC=false;}
+
+PARSER_BEGIN(DTD)
+package name.panitz.crempel.util.xml.dtd.parser;
+
+import name.panitz.crempel.util.*;
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.FileReader;
+
+public class DTD {}
+PARSER_END(DTD)
+
+TOKEN :
+{<ELEMENTDEC: "<!ELEMENT">
+|<DOCTYPE:    "<!DOCTYPE"> 
+|<ATTLIST:    "<!ATTLIST"> 
+|<REQUIRED:   "#REQUIRED"> 
+|<IMPLIED:    "#IMPLIED"> 
+|<EMPTY: "EMPTY">
+|<PCDATA: "#PCDATA">
+|<CDATA: "CDATA">
+|<ANY: "ANY">
+|<SYSTEM: "SYSTEM">
+|<PUBLIC: "PUBLIC">
+|<GR: ">">
+|<QMARK: "?">
+|<PLUS: "+">
+|<STAR: "*">
+|<#NameStartCar: [":","A"-"Z","_","a"-"z"
+                 ,"\u00C0"-"\u00D6"
+                 ,"\u00D8"-"\u00F6"
+                 ,"\u00F8"-"\u02FF"
+                 ,"\u0370"-"\u037D"
+                 ,"\u037F"-"\u1FFF"
+                 ,"\u200C"-"\u200D"
+                 ,"\u2070"-"\u218F"
+                 ,"\u2C00"-"\u2FEF"
+                 ,"\u3001"-"\uD7FF"
+                 ,"\uF900"-"\uFDCF"
+                 ,"\uFDF0"-"\uFFFD"]>
+//                 ,"\u10000"-"\uEFFFF"]>
+|<#InnerNameChar: ["-", ".","0"-"9", "\u00B7" 
+                  ,"\u0300"-"\u036F"
+                  ,"\u203F"-"\u2040"]>
+|<#NameChar: <InnerNameChar>|<NameStartCar>>
+|<Name: <NameStartCar> (<NameChar>)* >
+
+|<#ALPHA:       ["a"-"z","A"-"Z","_","."]>
+|<#NUM:	        ["0"-"9"]>
+|<#ALPHANUM:    <ALPHA> | <NUM>>
+|<EQ: "=">
+|<BAR: "|">
+|<LPAR: "(">
+|<RPAR: ")">
+|<LBRACKET: "{">
+|<RBRACKET: "}">
+|<LSQBRACKET: "[">
+|<RSQBRACKET: "]">
+|<LE: "<">
+|<SEMICOLON: ";">
+|<COMMA: ",">
+|<QUOTE: "\"">
+|<SINGLEQUOTE: "'">
+}
+
+SKIP :
+{< ["\u0020","\t","\r","\n"] >}
+
+//"
+
+void externalID():
+{}
+{<SYSTEM> systemLiteral()
+ |<PUBLIC> systemLiteral() systemLiteral()
+}
+
+void systemLiteral():{}
+{<QUOTE><Name><QUOTE>|<SINGLEQUOTE><Name><SINGLEQUOTE>
+}
+
+Tuple3<List<Tuple2<String,DTDDef>>,List<String>,String> dtd():
+{ 
+  Token nameToken;
+  List<Tuple2<String,DTDDef>> els = new ArrayList<Tuple2<String,DTDDef>>();
+  List<String> atts = new ArrayList<String>();
+  Tuple2<String,DTDDef> el;
+}
+{<DOCTYPE> nameToken=<Name> externalID() <LSQBRACKET>
+
+   (el=elementdecl(){ els.add(el);}
+   |AttlistDecl())* 
+ <RSQBRACKET><GR>
+  {return new Tuple3<List<Tuple2<String,DTDDef>>,List<String>,String>
+                (els,atts,nameToken.toString());}
+}
+
+Tuple2<String,DTDDef> elementdecl():
+{Token nameToken;
+ DTDDef content;}
+{<ELEMENTDEC> nameToken=<Name>  content=contentspec()  <GR>
+  {return new Tuple2<String,DTDDef>(nameToken.toString(),content);}
+}
+
+
+DTDDef contentspec():
+{DTDDef result;}
+{  <EMPTY>{result=new DTDEmpty();} 
+ | <ANY>{result=new DTDAny();}
+ | (<LPAR>(result=Mixed()
+          |result=children()))
+ { return result;}
+}
+
+DTDDef children():
+{ List<DTDDef> cps;
+  DTDDef cp;
+  Modifier mod = Modifier.none;
+  boolean wasChoice = true;
+}
+{cp=cp()
+  (cps=choice()| cps=seq(){wasChoice=false;})
+   {cps.add(0,cp);} 
+   <RPAR>(<QMARK>{mod=Modifier.query;}
+     |<STAR>{mod=Modifier.star;}
+     |<PLUS>{mod=Modifier.plus;})?
+  {DTDDef result=wasChoice?ParserAux.createDTDChoice(cps)
+                          :ParserAux.createDTDSeq(cps);
+   return mod.mkDTDDef(result);
+  }
+}
+
+List<DTDDef> choice():
+{ DTDDef cp;
+  List<DTDDef> result = new ArrayList<DTDDef>();}
+{(<BAR> cp=cp() {result.add(cp);} )+
+  {return result;}
+}
+
+DTDDef cp():
+{ Token nameToken=null;
+  List<DTDDef> cps=new ArrayList<DTDDef>();
+  DTDDef cp;
+  Modifier mod=Modifier.none;
+  boolean wasChoice = true;
+  boolean wasTagName = false;
+}
+{((nameToken = <Name>{wasTagName=true;})
+ |(<LPAR>cp=cp()
+         (cps=choice()|cps=seq(){wasChoice=false;})
+    {cps.add(0,cp);}
+   <RPAR>
+  )
+ ) 
+     (<QMARK>{mod=Modifier.query;}
+     |<STAR>{mod=Modifier.star;}
+     |<PLUS>{mod=Modifier.plus;})?
+{
+ DTDDef result;
+ if (wasTagName) result=new DTDTagName(nameToken.toString());
+ else result=wasChoice?ParserAux.createDTDChoice(cps)
+                      :ParserAux.createDTDSeq(cps);
+ return mod.mkDTDDef(result);
+}
+}
+
+List<DTDDef> seq():
+{  List<DTDDef> result = new ArrayList<DTDDef>();
+   DTDDef cp;
+}
+{(<COMMA> cp=cp(){result.add(cp);} )*
+  {return result;}
+}
+
+DTDDef Mixed():
+{Token nameToken;
+ List<DTDDef> xs = new ArrayList<DTDDef>();
+ Modifier mod=Modifier.none;
+}
+{  <PCDATA> {xs.add(new DTDPCData());}
+  ((<BAR> nameToken=<Name> 
+    {xs.add(new DTDTagName(nameToken.toString()));}
+   )* <RPAR>(<STAR>{mod=Modifier.star;})?)
+{return mod.mkDTDDef(ParserAux.createDTDChoice(xs));}
+
+}
+
+void AttlistDecl():
+{Token nameToken;}
+{<ATTLIST> nameToken=<Name> (AttDef() )*
+{}}
+
+void AttDef():
+{Token nameToken;
+ boolean isRequired;}
+{nameToken=<Name> AttType() isRequired=DefaultDecl()
+  {}
+}
+
+void AttType():
+{}
+{ StringType()}//|TokenizedType()|EnumeratedType()}
+
+void StringType():
+{}
+{<CDATA>}
+
+
+boolean DefaultDecl():
+{ boolean isRequired=false;}
+
+{(<REQUIRED>{isRequired=true;} | <IMPLIED>)
+//| (('#FIXED' S)? AttValue)
+{return isRequired;}
+}
+
+-----------------Codeschnipsel Nummer 58:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd.parser;
+
+import name.panitz.crempel.util.xml.dtd.tree.*;
+import java.util.List;
+
+public class ParserAux{
+  static public DTDDef createDTDSeq(List<DTDDef> xs){
+    return new DTDSeq(xs);
+  }
+  static public DTDDef createDTDChoice(List<DTDDef> xs){
+    return new DTDChoice(xs);
+  }  
+}
+
+-----------------Codeschnipsel Nummer 59:------------------------------------------------
+package name.panitz.crempel.util.xml.dtd.tree;
+
+public enum Modifier { none, star, plus, query;
+
+  public String toString(){
+    switch(this) {
+          case star:   return "*";
+          case plus:   return "+";
+          case query:  return "?";
+    }
+    return "";
+  }
+
+  public DTDDef mkDTDDef(DTDDef dtd){
+    switch(this) {
+      case star:   return new DTDStar(dtd);
+      case plus:   return new DTDPlus(dtd);
+      case query:  return new DTDQuery(dtd);
+    }
+    return dtd;
+  }
+}
+
+-----------------Codeschnipsel Nummer 60:------------------------------------------------
+package name.panitz.swing.threadTest;
+import javax.swing.SwingUtilities;
+
+/**
+ * This is the 3rd version of SwingWorker (also known as
+ * SwingWorker 3), an abstract class that you subclass to
+ * perform GUI-related work in a dedicated thread.  For
+ * instructions on using this class, see:
+ * 
+ * http://java.sun.com/docs/books/tutorial/uiswing/misc/threads.html
+ *
+ * Note that the API changed slightly in the 3rd version:
+ * You must now invoke start() on the SwingWorker after
+ * creating it.
+ */
+public abstract class SwingWorker {
+    private Object value;  // see getValue(), setValue()
+    private Thread thread;
+
+    /** 
+     * Class to maintain reference to current worker thread
+     * under separate synchronization control.
+     */
+    private static class ThreadVar {
+        private Thread thread;
+        ThreadVar(Thread t) { thread = t; }
+        synchronized Thread get() { return thread; }
+        synchronized void clear() { thread = null; }
+    }
+
+    private ThreadVar threadVar;
+
+    /** 
+     * Get the value produced by the worker thread, or null if it 
+     * hasn't been constructed yet.
+     */
+    protected synchronized Object getValue() { 
+        return value; 
+    }
+
+    /** 
+     * Set the value produced by worker thread 
+     */
+    private synchronized void setValue(Object x) { 
+        value = x; 
+    }
+
+    /** 
+     * Compute the value to be returned by the <code>get</code> method. 
+     */
+    public abstract Object construct();
+
+    /**
+     * Called on the event dispatching thread (not on the worker thread)
+     * after the <code>construct</code> method has returned.
+     */
+    public void finished() {
+    }
+
+    /**
+     * A new method that interrupts the worker thread.  Call this method
+     * to force the worker to stop what it's doing.
+     */
+    public void interrupt() {
+        Thread t = threadVar.get();
+        if (t != null) {
+            t.interrupt();
+        }
+        threadVar.clear();
+    }
+
+    /**
+     * Return the value created by the <code>construct</code> method.  
+     * Returns null if either the constructing thread or the current
+     * thread was interrupted before a value was produced.
+     * 
+     * @return the value created by the <code>construct</code> method
+     */
+    public Object get() {
+        while (true) {  
+            Thread t = threadVar.get();
+            if (t == null) {
+                return getValue();
+            }
+            try {
+                t.join();
+            }
+            catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // propagate
+                return null;
+            }
+        }
+    }
+
+
+    /**
+     * Start a thread that will call the <code>construct</code> method
+     * and then exit.
+     */
+    public SwingWorker() {
+        final Runnable doFinished = new Runnable() {
+           public void run() { finished(); }
+        };
+
+        Runnable doConstruct = new Runnable() { 
+            public void run() {
+                try {
+                    setValue(construct());
+                }
+                finally {
+                    threadVar.clear();
+                }
+
+                SwingUtilities.invokeLater(doFinished);
+            }
+        };
+
+        Thread t = new Thread(doConstruct);
+        threadVar = new ThreadVar(t);
+    }
+
+    /**
+     * Start the worker thread.
+     */
+    public void start() {
+        Thread t = threadVar.get();
+        if (t != null) {
+            t.start();
+        }
+    }
+}
+

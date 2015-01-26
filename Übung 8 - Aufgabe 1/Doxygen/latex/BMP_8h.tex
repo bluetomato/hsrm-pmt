@@ -1,0 +1,281 @@
+\hypertarget{BMP_8h}{\section{B\-M\-P.\-h File Reference}
+\label{BMP_8h}\index{B\-M\-P.\-h@{B\-M\-P.\-h}}
+}
+
+
+Header data for \hyperlink{BMP_8c}{B\-M\-P.\-c}.  
+
+
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+Include dependency graph for B\-M\-P.\-h\-:
+This graph shows which files directly or indirectly include this file\-:
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structColor}{Color}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structColor}{Color}. \end{DoxyCompactList}\item 
+struct \hyperlink{structBmp}{Bmp}
+\begin{DoxyCompactList}\small\item\em Struct \hyperlink{structBmp}{Bmp}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structBmp}{Bmp} $\ast$ \hyperlink{BMP_8h_a209ad6aff30480368228c459a23884cb}{new\-Bmp} (int width, int height)
+\item 
+void \hyperlink{BMP_8h_ad99617869bf6b7cd4ec414cd95330dc4}{delete\-Bmp} (\hyperlink{structBmp}{Bmp} $\ast$this)
+\item 
+void \hyperlink{BMP_8h_a962ab5f100d03b1a06e0b68f937f72b4}{write\-Bmp\-To\-File} (\hyperlink{structBmp}{Bmp} $\ast$this, char $\ast$file\-Name)
+\item 
+void \hyperlink{BMP_8h_ab4a41191829c26430423afe9b75fa99b}{set\-Bmp\-Point} (\hyperlink{structBmp}{Bmp} $\ast$this, \hyperlink{structColor}{Color} c, int x, int y)
+\item 
+void \hyperlink{BMP_8h_ac746f94f83ae3ca835c04fb8d674b00a}{background} (\hyperlink{structBmp}{Bmp} $\ast$this, \hyperlink{structColor}{Color} c)
+\item 
+void \hyperlink{BMP_8h_a2b9555d533ae552ee569ce55dae23249}{fill\-Rect} (\hyperlink{structBmp}{Bmp} $\ast$this, \hyperlink{structColor}{Color} c, int x, int y, int w, int h)
+\item 
+void \hyperlink{BMP_8h_af71fa403d346e7ce70f232707886bd30}{draw\-Line} (\hyperlink{structBmp}{Bmp} $\ast$this, \hyperlink{structColor}{Color} c, int from\-X, int from\-Y, int to\-X, int to\-Y)
+\item 
+void \hyperlink{BMP_8h_aadc10df8c640e9b3e0e906e79a8209d3}{fill\-Circle} (\hyperlink{structBmp}{Bmp} $\ast$this, \hyperlink{structColor}{Color} c, int x, int y, int radius)
+\item 
+\hyperlink{structBmp}{Bmp} $\ast$ \hyperlink{BMP_8h_afe455ef7922a2d45c029633c77e63dd0}{bar\-Chart} (double values\mbox{[}$\,$\mbox{]}, int value\-Length)
+\item 
+\hyperlink{structBmp}{Bmp} $\ast$ \hyperlink{BMP_8h_ae23652d2bb9518840b94e7256fa0c211}{pie\-Chart} (double values\mbox{[}$\,$\mbox{]}, int value\-Length)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Header data for \hyperlink{BMP_8c}{B\-M\-P.\-c}. \begin{DoxyAuthor}{Author}
+Prof. Panitz \& Stephanie Scholl 
+\end{DoxyAuthor}
+\begin{DoxyNote}{Note}
+Matrikelnummer\-: 979993 
+
+Hochschule Rhein\-Main
+
+Fach\-: Programmiermethoden-\/ und Techniken 
+
+2. Semester 
+
+Projektarbeit
+
+Professor\-: Sven Eric Panitz 
+
+Praktikumsleiter\-: Christian Lassmann 
+\end{DoxyNote}
+
+
+\subsection{Function Documentation}
+\hypertarget{BMP_8h_ac746f94f83ae3ca835c04fb8d674b00a}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!background@{background}}
+\index{background@{background}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{background}]{\setlength{\rightskip}{0pt plus 5cm}void background (
+\begin{DoxyParamCaption}
+\item[{{\bf Bmp} $\ast$}]{this, }
+\item[{{\bf Color}}]{c}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_ac746f94f83ae3ca835c04fb8d674b00a}
+Fills complete Background of bitmap with an color
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Bmp$\ast$ -\/ Pointer to actual Struct B\-M\-P \\
+\hline
+{\em c} & \hyperlink{structColor}{Color} -\/ \hyperlink{structColor}{Color} which needs to be painted \\
+\hline
+\end{DoxyParams}
+\hypertarget{BMP_8h_afe455ef7922a2d45c029633c77e63dd0}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!bar\-Chart@{bar\-Chart}}
+\index{bar\-Chart@{bar\-Chart}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{bar\-Chart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bmp}$\ast$ bar\-Chart (
+\begin{DoxyParamCaption}
+\item[{double}]{values\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{value\-Length}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_afe455ef7922a2d45c029633c77e63dd0}
+Creates a barchart out of an array
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & double\mbox{[}\mbox{]} -\/ values you want to display \\
+\hline
+{\em value\-Length} & Integer -\/ length of array which needs to be displayed\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new B\-M\-P with a barchart 
+\end{DoxyReturn}
+\hypertarget{BMP_8h_ad99617869bf6b7cd4ec414cd95330dc4}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!delete\-Bmp@{delete\-Bmp}}
+\index{delete\-Bmp@{delete\-Bmp}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{delete\-Bmp}]{\setlength{\rightskip}{0pt plus 5cm}void delete\-Bmp (
+\begin{DoxyParamCaption}
+\item[{{\bf Bmp} $\ast$}]{this}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_ad99617869bf6b7cd4ec414cd95330dc4}
+Deletes a B\-M\-P and frees allocated space
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Pointer -\/ to actual Struct B\-M\-P \\
+\hline
+\end{DoxyParams}
+\hypertarget{BMP_8h_af71fa403d346e7ce70f232707886bd30}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!draw\-Line@{draw\-Line}}
+\index{draw\-Line@{draw\-Line}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{draw\-Line}]{\setlength{\rightskip}{0pt plus 5cm}void draw\-Line (
+\begin{DoxyParamCaption}
+\item[{{\bf Bmp} $\ast$}]{this, }
+\item[{{\bf Color}}]{c, }
+\item[{int}]{from\-X, }
+\item[{int}]{from\-Y, }
+\item[{int}]{to\-X, }
+\item[{int}]{to\-Y}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_af71fa403d346e7ce70f232707886bd30}
+Draws line on B\-M\-P (from one coordinate to another)
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Bmp$\ast$ -\/ Pointer to actual Struct B\-M\-P \\
+\hline
+{\em c} & \hyperlink{structColor}{Color} -\/ \hyperlink{structColor}{Color} which needs to be painted \\
+\hline
+{\em from\-X} & Integer -\/ coordinate for start of line on x-\/aches \\
+\hline
+{\em from\-Y} & Integer -\/ coordinate for start of line on y-\/aches \\
+\hline
+{\em to\-X} & Integer -\/ coordinate for end of line on x-\/aches \\
+\hline
+{\em to\-Y} & Integer -\/ coordinate for end of line on y-\/aches \\
+\hline
+\end{DoxyParams}
+\hypertarget{BMP_8h_aadc10df8c640e9b3e0e906e79a8209d3}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!fill\-Circle@{fill\-Circle}}
+\index{fill\-Circle@{fill\-Circle}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{fill\-Circle}]{\setlength{\rightskip}{0pt plus 5cm}void fill\-Circle (
+\begin{DoxyParamCaption}
+\item[{{\bf Bmp} $\ast$}]{this, }
+\item[{{\bf Color}}]{c, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{radius}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_aadc10df8c640e9b3e0e906e79a8209d3}
+Fills Circle on B\-M\-P on specific coordinate
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Bmp$\ast$ -\/ Pointer to actual Struct B\-M\-P \\
+\hline
+{\em c} & \hyperlink{structColor}{Color} -\/ \hyperlink{structColor}{Color} which needs to be painted \\
+\hline
+{\em x} & Integer -\/ center of circle on x-\/achses \\
+\hline
+{\em y} & Integer -\/ center of circle on x-\/achses \\
+\hline
+{\em radius} & Integer -\/ radius of circle \\
+\hline
+\end{DoxyParams}
+\hypertarget{BMP_8h_a2b9555d533ae552ee569ce55dae23249}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!fill\-Rect@{fill\-Rect}}
+\index{fill\-Rect@{fill\-Rect}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{fill\-Rect}]{\setlength{\rightskip}{0pt plus 5cm}void fill\-Rect (
+\begin{DoxyParamCaption}
+\item[{{\bf Bmp} $\ast$}]{this, }
+\item[{{\bf Color}}]{c, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_a2b9555d533ae552ee569ce55dae23249}
+Places and fills an specific rectangle on B\-M\-P
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Bmp$\ast$ -\/ Pointer to actual Struct B\-M\-P \\
+\hline
+{\em c} & \hyperlink{structColor}{Color} -\/ \hyperlink{structColor}{Color} which needs to be painted \\
+\hline
+{\em x} & Integer -\/ coordinate for start of rectangle on x-\/aches \\
+\hline
+{\em y} & Integer -\/ coordinate for start of rectangle on y-\/aches \\
+\hline
+{\em w} & Integer -\/ width of the rectangle \\
+\hline
+{\em h} & Integer -\/ height of the rectangle \\
+\hline
+\end{DoxyParams}
+\hypertarget{BMP_8h_a209ad6aff30480368228c459a23884cb}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!new\-Bmp@{new\-Bmp}}
+\index{new\-Bmp@{new\-Bmp}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{new\-Bmp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bmp}$\ast$ new\-Bmp (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_a209ad6aff30480368228c459a23884cb}
+Initializes a new B\-M\-P
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & Integer -\/ width of the new B\-M\-P \\
+\hline
+{\em height} & Integer -\/ height of the new B\-M\-P\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to new B\-M\-P 
+\end{DoxyReturn}
+\hypertarget{BMP_8h_ae23652d2bb9518840b94e7256fa0c211}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!pie\-Chart@{pie\-Chart}}
+\index{pie\-Chart@{pie\-Chart}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{pie\-Chart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bmp}$\ast$ pie\-Chart (
+\begin{DoxyParamCaption}
+\item[{double}]{values\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{value\-Length}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_ae23652d2bb9518840b94e7256fa0c211}
+Creates a piechart out of an array
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & double\mbox{[}\mbox{]} -\/ values you want to display \\
+\hline
+{\em value\-Length} & Integer -\/ length of array which needs to be displayed\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new B\-M\-P with a piechart 
+\end{DoxyReturn}
+\hypertarget{BMP_8h_ab4a41191829c26430423afe9b75fa99b}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!set\-Bmp\-Point@{set\-Bmp\-Point}}
+\index{set\-Bmp\-Point@{set\-Bmp\-Point}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{set\-Bmp\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void set\-Bmp\-Point (
+\begin{DoxyParamCaption}
+\item[{{\bf Bmp} $\ast$}]{this, }
+\item[{{\bf Color}}]{c, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_ab4a41191829c26430423afe9b75fa99b}
+Sets point on B\-M\-P
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Bmp$\ast$ -\/ Pointer to actual Struct B\-M\-P \\
+\hline
+{\em c} & \hyperlink{structColor}{Color} -\/ \hyperlink{structColor}{Color} which needs to be painted \\
+\hline
+{\em x} & Integer -\/ coordinate for dot on x-\/aches \\
+\hline
+{\em y} & Integer -\/ coordinate for dot on y-\/aches \\
+\hline
+\end{DoxyParams}
+\hypertarget{BMP_8h_a962ab5f100d03b1a06e0b68f937f72b4}{\index{B\-M\-P.\-h@{B\-M\-P.\-h}!write\-Bmp\-To\-File@{write\-Bmp\-To\-File}}
+\index{write\-Bmp\-To\-File@{write\-Bmp\-To\-File}!BMP.h@{B\-M\-P.\-h}}
+\subsubsection[{write\-Bmp\-To\-File}]{\setlength{\rightskip}{0pt plus 5cm}void write\-Bmp\-To\-File (
+\begin{DoxyParamCaption}
+\item[{{\bf Bmp} $\ast$}]{this, }
+\item[{char $\ast$}]{file\-Name}
+\end{DoxyParamCaption}
+)}}\label{BMP_8h_a962ab5f100d03b1a06e0b68f937f72b4}
+Writes the Struct B\-M\-P to a file
+
+
+\begin{DoxyParams}{Parameters}
+{\em this} & Bmp$\ast$ -\/ Pointer to actual Struct B\-M\-P \\
+\hline
+{\em file\-Name} & char$\ast$ -\/ Name of file used \\
+\hline
+\end{DoxyParams}
